@@ -1,0 +1,31 @@
+{
+  "name": "next_starter",
+  "version": "0.0.1",
+  "description": "next project starter",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinkspark/next_starter.git"
+  },
+  "keywords": [
+    "starter",
+    "next"
+  ],
+  "author": "Neal Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blinkspark/next_starter/issues"
+  },
+  "homepage": "https://github.com/blinkspark/next_starter#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "next": "^7.0.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  }
+}
