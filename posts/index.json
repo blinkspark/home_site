@@ -1,7 +1,11 @@
 {
   "posts": [
     {
-      "fname": "test.md",
+      "fname": "hilightjs.md",
+      "title": "为代码添加高亮"
+    },
+    {
+      "fname": "first.md",
       "title": "第一篇博客"
     }
   ]

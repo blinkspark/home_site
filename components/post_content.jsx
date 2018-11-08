@@ -6,9 +6,8 @@ class PostContent extends React.Component {
     let cNames = ["markdown"]
     cNames = cNames.concat(this.props.classToAdd)
     return (
-      <div className="markdown mb-5">
-        <hr />
-        <Markdown source={this.props.data} />
+      <div className="markdown mb-5 javascript">
+        <Markdown source={this.props.data}/>
         <hr />
       </div>
     )

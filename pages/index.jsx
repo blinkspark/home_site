@@ -7,7 +7,7 @@ const Index = props => (
   <Layout>
     <Head>
       <title>Neal Wang</title>
-      <meta name="keywords" content="" />
+      <meta name="keywords" content="nextjs node nodejs react Neal Wang 技术" />
     </Head>
     <div className="container avoid-header">
       {props.contents.map((v, i) => (
