@@ -1,5 +1,7 @@
 # 为代码添加高亮
 
+作者：Neal Wang _2018年11月8日 13:40:39_
+
 因为要写技术博客，内容里面很可能要添加代码。但是，平平淡淡的不加修饰总是不太舒服，于是找了一下React里面有没有代码高亮组件。虽然找到了一个叫react-highlight的组件，但是不能支持react-markdown,所以只能用非react的方法了。
 
 直接在pages/_document.js下添加highlight.js的css和js文件

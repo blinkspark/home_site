@@ -37,13 +37,9 @@ const Pagination = ({ current, total }) => {
     <nav aria-label="Page navigation">
       <ul className="pagination">
         {arr.map(v => (
-          <li
-            className={`page-item${v.isActive ? " active" : ""}${
-              v.isDisable ? " disable" : ""
-            }`}
-            key={v.content}
-          >
-            <Link href={v.isDisable ? "" : v.href}>
+          <li className={`page-item${v.isActive ? " active" : ""}${v.isDisable ? " disable" : ""}`}
+            key={v.content}>
+            <Link href={v.isDisable ? "" : v.href} passHref={true}>
               <a className="page-link">{v.content}</a>
             </Link>
           </li>

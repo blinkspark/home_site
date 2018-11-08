@@ -17,6 +17,7 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossOrigin="anonymous"></link>
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/darcula.min.css" />
           <link rel="stylesheet" href="/static/style.css"></link>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
         </Head>
         <body>
           <Main />
