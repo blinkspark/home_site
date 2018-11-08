@@ -6,9 +6,9 @@ const Router = require("./api")
 const proxy = require('http-proxy-middleware')
 
 let wsProxy = proxy('/bnws', {
-  target: 'http://nealwang.top:2233',
+  target: 'http://localhost:2233',
   changeOrigin: true,
-  logLevel: 'debug',
+  // logLevel: 'debug',
   ws: true
 })
 

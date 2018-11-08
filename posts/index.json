@@ -1,6 +1,10 @@
 {
   "posts": [
     {
+      "fname": "reverse_proxy.md",
+      "title": "express 设置反代"
+    },
+    {
       "fname": "hilightjs.md",
       "title": "为代码添加高亮"
     },
