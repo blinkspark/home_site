@@ -8,7 +8,7 @@
 $ npm i http-proxy-middleware
 ```
 
-按照好后在服务器的js文件中加入
+安装好后在服务器的js文件中加入
 ```
 const proxy = require('http-proxy-middleware')
 
