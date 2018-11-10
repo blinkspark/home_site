@@ -3,20 +3,20 @@ const next = require("next")
 const fs = require("fs")
 const util = require("util")
 const Router = require("./api")
-const proxy = require('http-proxy-middleware')
+// const proxy = require('http-proxy-middleware')
 
-let wsProxy = proxy('/bnws', {
-  target: 'http://localhost:2233',
-  changeOrigin: true,
-  // logLevel: 'debug',
-  ws: true
-})
+// let wsProxy = proxy('/bnws', {
+//   target: 'http://localhost:2233',
+//   changeOrigin: true,
+//   // logLevel: 'debug',
+//   ws: true
+// })
 
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const port = dev ? 3000 : 80
+const port = 3000
 
 app
   .prepare()
@@ -29,12 +29,12 @@ app
     //     app.render(req, res, actualPage, queryParams)
     // })
     server.use("/api", Router)
-    server.use('/bnws', wsProxy)
+    // server.use('/bnws', wsProxy)
 
     server.get("*", (req, res) => {
       return handle(req, res)
     })
-    server.on('upgrade', wsProxy.upgrade)
+    // server.on('upgrade', wsProxy.upgrade)
 
     server.listen(port, err => {
       if (err) throw err
