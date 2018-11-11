@@ -40,17 +40,17 @@ module.exports = {
       }
     })
 
-    Router.post("/posts", async (req, res) => {
-      try {
-        await db.ConnectOnce(configJson.mongoUrl)
-        let { title, content } = req.body
-        let article = await ArticalModel.create({ title, content })
-        app.render(req, res, `/post`, { id: article._id })
-      } catch (error) {
-        console.error(error)
-        next()
-      }
-    })
+    // Router.post("/posts", async (req, res) => {
+    //   try {
+    //     await db.ConnectOnce(configJson.mongoUrl)
+    //     let { title, content } = req.body
+    //     let article = await ArticalModel.create({ title, content })
+    //     app.render(req, res, `/post`, { id: article._id })
+    //   } catch (error) {
+    //     console.error(error)
+    //     next()
+    //   }
+    // })
 
     return Router
   }
