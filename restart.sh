@@ -1,4 +1,4 @@
 #!/bin/bash
 sudo killall -9 node
-sudo git pull
+git pull
 nohup sudo npm start &
