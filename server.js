@@ -2,7 +2,8 @@ const express = require("express")
 const next = require("next")
 const fs = require("fs")
 const util = require("util")
-const Router = require("./api")
+const ApiRouter = require("./src/api")
+const BodyParser = require('body-parser')
 // const proxy = require('http-proxy-middleware')
 
 // let wsProxy = proxy('/bnws', {
@@ -20,15 +21,18 @@ const port = 3000
 
 app
   .prepare()
-  .then(() => {
+  .then(async () => {
     const server = express()
+
+    server.use(BodyParser.json())
+    server.use(BodyParser.urlencoded({ extended: true }));
 
     // server.get('/p/:id', (req, res) => {
     //     const actualPage = '/post'
     //     const queryParams = { id: req.params.id }
     //     app.render(req, res, actualPage, queryParams)
     // })
-    server.use("/api", Router)
+    server.use("/api", await ApiRouter.WithApp(app))
     // server.use('/bnws', wsProxy)
 
     server.get("*", (req, res) => {
