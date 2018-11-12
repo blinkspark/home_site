@@ -1,9 +1,10 @@
 const express = require("express")
 const next = require("next")
-const fs = require("fs")
-const util = require("util")
 const ApiRouter = require("./src/api")
 const BodyParser = require('body-parser')
+const session = require('express-session')
+const passport = require('./src/users').localPassport
+
 // const proxy = require('http-proxy-middleware')
 
 // let wsProxy = proxy('/bnws', {
@@ -24,8 +25,17 @@ app
   .then(async () => {
     const server = express()
 
+    server.use(session({
+      resave: false,//添加这行
+      saveUninitialized: true,//添加这行 
+      secret: 'pHEFupykX3v7GBmC2MA7cEpjPTqnRFu'
+    }))
     server.use(BodyParser.json())
-    server.use(BodyParser.urlencoded({ extended: true }));
+    server.use(BodyParser.urlencoded({ extended: true }))
+    server.use(passport.initialize())
+    server.use(passport.session())
+    //Could be async if we wanted it to
+
 
     // server.get('/p/:id', (req, res) => {
     //     const actualPage = '/post'

@@ -4,7 +4,7 @@ module.exports = {
   con: [],
   /**
    * @param {String} url 
-   * @returns {mongoose.Connection}
+   * @returns {Promise<mongoose.Connection>}
    */
   ConnectOnce: async function (url) {
     if (this.con[url]) {

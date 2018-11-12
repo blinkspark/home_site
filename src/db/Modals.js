@@ -11,6 +11,12 @@ let ArticleSchema = new Schema({
 })
 let ArticalModel = mongoose.model('Article', ArticleSchema)
 
+let UserSchema = new Schema({
+  username: String,
+  password: String
+})
+let UserModel = mongoose.model('User', UserSchema)
+
 module.exports = {
-  ArticalModel
+  ArticalModel, UserModel
 }

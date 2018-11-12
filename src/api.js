@@ -11,12 +11,16 @@ module.exports = {
   /**
    * 
    * @param {next.Server} app 
-   * @returns {Promise} 
+   * @returns {Promise<Router>} 
    */
   WithApp: async function (app) {
+    const UsersRouter = await require('./users').WithApp(app)
+
     let configJson = JSON.parse((await readFile('./credential.json')).toString())
 
     let Router = express.Router()
+
+    Router.use('/users', UsersRouter)
 
     Router.get("/posts", async (req, res, next) => {
       try {
