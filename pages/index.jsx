@@ -4,7 +4,7 @@ import PostContent from "../components/post_content"
 import Head from "next/head"
 import Pagination from "../components/pagination"
 const Index = props => (
-  <Layout>
+  <Layout user={props.user}>
     <Head>
       <title>Neal Wang</title>
       <meta name="keywords" content="nextjs node nodejs react Neal Wang 技术" />
@@ -35,11 +35,11 @@ Index.getInitialProps = async function (v) {
       let p = posts.data[i]
       postContents.push(p)
     }
-
     return {
       contents: postContents,
       page: v.query.page ? v.query.page : 1,
       totalPage: Math.ceil(posts.data.length / Index.MaxPostPerPage),
+      user: v.req.session.user
     }
   } catch (error) {
     console.log(error)

@@ -1,4 +1,3 @@
-import Link from "next/link"
 const Pagination = ({ current, total }) => {
   current = Number(current)
   total = Number(total)
@@ -39,9 +38,7 @@ const Pagination = ({ current, total }) => {
         {arr.map(v => (
           <li className={`page-item${v.isActive ? " active" : ""}${v.isDisable ? " disable" : ""}`}
             key={v.content}>
-            <Link href={v.isDisable ? "" : v.href} passHref={true}>
-              <a className="page-link">{v.content}</a>
-            </Link>
+            <a href={v.isDisable ? "" : v.href} className="page-link">{v.content}</a>
           </li>
         ))}
       </ul>

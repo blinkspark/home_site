@@ -1,8 +1,9 @@
 import Header from './header'
+import React from 'react'
 const MainLayout = props=>(
-  <div>
-    <Header></Header>
+  <React.Fragment>
+    <Header user={props.user}></Header>
     {props.children}
-  </div>
+  </React.Fragment>
 )
 export default MainLayout

@@ -1,5 +1,4 @@
 const express = require("express")
-let passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const db = require('./db/db')
 const { UserModel } = require('./db/Modals')
@@ -7,6 +6,8 @@ const fs = require("fs")
 const util = require("util")
 const bcrypt = require('bcrypt')
 const next = require('next')
+const uuidv4 = require('uuid/v4')
+const blinkUtil = require('blink-util')
 
 const saltRound = 10
 
@@ -22,55 +23,32 @@ module.exports = {
   WithApp: async function (app) {
     let Router = express.Router()
 
-    let config = JSON.parse((await readFile('credential.json')).toString())
+    let credential = await blinkUtil.fs.readJson('credential.json')
 
-    passport.use(new LocalStrategy(
-      async (username, password, done) => {
-        await db.ConnectOnce(config.mongoUrl)
-        let user = await UserModel.findOne({ username })
-
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username.' })
-        } else {
-          let ok = await bcrypt.compare(password, user.password)
-
-          if (!ok) {
-            return done(null, false, { message: 'Incorrect password.' })
-          }
-          return done(null, user)
-        }
-      })
-    )
-
-    passport.serializeUser((user, done) => {
-      done(null, user.username);
-    })
-
-    //ASYNC ALL THE THINGS!!
-    passport.deserializeUser(async (username, done) => {
-      try {
-        await db.ConnectOnce(config.mongoUrl)
-        let user = await UserModel.findOne({ username });
-        if (!user) {
-          return done(new Error('user not found'));
-        }
-        done(null, user)
-      } catch (e) {
-        done(e)
+    Router.post('/login', async (req, res, next) => {
+      let { username, password } = req.body
+      if (!username || !password) {
+        res.redirect('/login')
+        return
       }
-    })
+      await db.ConnectOnce(credential.mongoUrl)
+      let user = await UserModel.findOne({ username })
+      if (!user) { res.redirect('/login'); return }
 
-    Router.post('/login', (req, res, next) => {
-      passport.authenticate('local', (err, user, info) => {
-        console.log(err, user, info)
-        if (err) { return next(err) }
-        if (!user) { return res.redirect('/_error') }
-        // req.logIn(user, function (err) {
-        //   if (err) { return next(err) }
-        //   return res.redirect('/users/' + user.username)
-        // })
+      let ok = await bcrypt.compare(password, user.password)
+      if (!ok) {
+        res.redirect('/login'); return
+      }
+      else {
+        user.accessToken = uuidv4()
+        user.expiresOn = Date.now() + blinkUtil.date.week(1)
+        await user.save()
+        // res.cookie('user', {
+        //   username, accessToken: user.accessToken
+        // }, app.cookieOptions)
+        res.req.session.user = { username: username, accessToken: user.accessToken }
         res.redirect('/')
-      })(req, res, next)
+      }
     })
 
     // Router.post('/register', async (req, res) => {
@@ -96,5 +74,4 @@ module.exports = {
 
     return Router
   },
-  localPassport: passport
 }

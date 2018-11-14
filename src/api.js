@@ -4,6 +4,7 @@ const util = require("util")
 const db = require('./db/db')
 const { ArticalModel } = require('./db/Modals')
 const next = require("next")
+const R = require('ramda')
 
 const readFile = util.promisify(fs.readFile)
 
@@ -44,17 +45,21 @@ module.exports = {
       }
     })
 
-    // Router.post("/posts", async (req, res) => {
-    //   try {
-    //     await db.ConnectOnce(configJson.mongoUrl)
-    //     let { title, content } = req.body
-    //     let article = await ArticalModel.create({ title, content })
-    //     app.render(req, res, `/post`, { id: article._id })
-    //   } catch (error) {
-    //     console.error(error)
-    //     next()
-    //   }
-    // })
+    Router.post("/posts", async (req, res) => {
+      if (R.isNil(req.session.user)) {
+        res.redirect('/login')
+      } else {
+        try {
+          await db.ConnectOnce(configJson.mongoUrl)
+          let { title, content } = req.body
+          let article = await ArticalModel.create({ title, content })
+          res.redirect('/')
+        } catch (error) {
+          console.error(error)
+          next()
+        }
+      }
+    })
 
     return Router
   }
