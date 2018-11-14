@@ -21,9 +21,9 @@ const Pagination = ({ current, total }) => {
   }
   let next = {
     isActive: false,
-    isDisable: current + 1 > total - 1 ? true : false,
+    isDisable: current + 1 > total ? true : false,
     content: ">",
-    href: `/?page=${current + 1 > total - 1 ? total - 1 : current + 1}`,
+    href: `/?page=${current + 1 > total ? total : current + 1}`,
   }
   let last = {
     isActive: false,
