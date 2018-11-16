@@ -6,7 +6,6 @@ class PostContent extends React.Component {
     return (
       <div className="markdown mb-5 javascript">
         <Markdown source={this.props.data}/>
-        <hr />
       </div>
     )
   }

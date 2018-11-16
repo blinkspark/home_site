@@ -5,25 +5,31 @@ import Head from "next/head"
 import Pagination from "../components/pagination"
 import React from 'react'
 import PostInfo from '../components/post_info'
-const Index = props => (
-  <Layout user={props.user}>
-    <Head>
-      <title>Neal Wang</title>
-      <meta name="keywords" content="nextjs node nodejs react Neal Wang 技术" />
-    </Head>
-    <div className="container avoid-header">
-      {props.contents.map((v, i) => (
-        <React.Fragment>
-          <PostInfo title={v.title} author={v.author} createDate={v.createDate} />
-          <PostContent data={v.content} key={v._id} />
-        </React.Fragment>
-      ))}
-    </div>
-    <div className="container">
-      <Pagination current={props.page} total={props.totalPage} />
-    </div>
-  </Layout>
-)
+const Index = props => {
+  return (
+    <Layout user={props.user}>
+      <Head>
+        <title>Neal Wang</title>
+        <meta name="keywords" content="nextjs node nodejs react Neal Wang 技术" key="keywords" />
+      </Head>
+      <div className="container avoid-header">
+        {props.contents.map((v) => {
+          return (
+            <React.Fragment key={v._id}>
+              <PostInfo title={v.title} author={v.author} createDate={v.createDate} />
+              <PostContent data={v.content} />
+              <a href={`/editor?id=${v._id}`}>编辑</a>
+              <hr />
+            </React.Fragment>
+          )
+        })}
+      </div>
+      <div className="container">
+        <Pagination current={props.page} total={props.totalPage} />
+      </div>
+    </Layout>
+  )
+}
 Index.MaxPostPerPage = 5
 
 Index.getInitialProps = async function (v) {
