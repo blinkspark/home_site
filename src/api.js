@@ -52,7 +52,7 @@ module.exports = {
         try {
           await db.ConnectOnce(configJson.mongoUrl)
           let { title, content, author } = req.body
-          let article = await ArticalModel.create({ title, content })
+          let article = await ArticalModel.create({ title, content, author })
           res.redirect('/')
         } catch (error) {
           console.error(error)
