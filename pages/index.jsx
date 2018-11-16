@@ -3,6 +3,8 @@ import axios from "axios"
 import PostContent from "../components/post_content"
 import Head from "next/head"
 import Pagination from "../components/pagination"
+import React from 'react'
+import PostInfo from '../components/post_info'
 const Index = props => (
   <Layout user={props.user}>
     <Head>
@@ -11,7 +13,10 @@ const Index = props => (
     </Head>
     <div className="container avoid-header">
       {props.contents.map((v, i) => (
-        <PostContent data={v.content} key={v._id} />
+        <React.Fragment>
+          <PostInfo title={v.title} author={v.author} createDate={v.createDate} />
+          <PostContent data={v.content} key={v._id} />
+        </React.Fragment>
       ))}
     </div>
     <div className="container">
