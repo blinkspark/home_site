@@ -5,6 +5,16 @@ import Head from "next/head"
 import Pagination from "../components/pagination"
 import React from 'react'
 import PostInfo from '../components/post_info'
+
+const onDelete = (id) => {
+  return (e) => {
+    e.preventDefault()
+    axios.delete(`/api/posts/${id}`).then(
+      location.reload()
+    )
+  }
+}
+
 const Index = props => {
   return (
     <Layout user={props.user}>
@@ -18,7 +28,14 @@ const Index = props => {
             <React.Fragment key={v._id}>
               <PostInfo title={v.title} author={v.author} createDate={v.createDate} />
               <PostContent data={v.content} />
-              <a href={`/editor?id=${v._id}`}>编辑</a>
+              <ul class="nav mb-5">
+                <li class="nav-item">
+                  <a className="nav-link" href={`/editor?id=${v._id}`}>编辑</a>
+                </li>
+                <li class="nav-item">
+                  <a className="nav-link" onClick={onDelete(v._id)} href="#">删除</a>
+                </li>
+              </ul>
               <hr />
             </React.Fragment>
           )

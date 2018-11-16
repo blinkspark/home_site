@@ -51,9 +51,50 @@ module.exports = {
       } else {
         try {
           await db.ConnectOnce(configJson.mongoUrl)
-          let { title, content } = req.body
+          let { title, content, author } = req.body
           let article = await ArticalModel.create({ title, content })
           res.redirect('/')
+        } catch (error) {
+          console.error(error)
+          next()
+        }
+      }
+    })
+
+    Router.post("/posts/:id", async (req, res) => {
+      if (R.isNil(req.session.user)) {
+        res.redirect('/login')
+      } else {
+        try {
+          await db.ConnectOnce(configJson.mongoUrl)
+          console.log(req.body)
+          let { title, content, author } = req.body
+          let article = await ArticalModel.findOne({ _id: req.params.id })
+          if (!R.isNil(article)) {
+            article.title = title
+            article.content = content
+            article.author = author
+            await article.save()
+            res.redirect('/')
+          }
+          else {
+            res.send('article not found!')
+          }
+        } catch (error) {
+          console.error(error)
+          next()
+        }
+      }
+    })
+
+    Router.delete("/posts/:id", async (req, res) => {
+      if (R.isNil(req.session.user)) {
+        res.redirect('/login')
+      } else {
+        try {
+          await db.ConnectOnce(configJson.mongoUrl)
+          await ArticalModel.findOneAndDelete({ _id: req.params.id })
+          res.end()
         } catch (error) {
           console.error(error)
           next()
