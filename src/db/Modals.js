@@ -11,7 +11,8 @@ let ArticleSchema = new Schema({
   author: String,
   createDate: { type: Date, default: Date.now },
   fixedTop: Boolean,
-  content: String
+  content: String,
+  tags: [String]
 })
 let ArticalModel = mongoose.model('Article', ArticleSchema)
 

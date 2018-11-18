@@ -4,11 +4,12 @@ const apiRouter = require("./src/api")
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const rootRouter = require('./src/root')
-const sessionParser = require('express-session')
+const session = require('express-session')
 const blinkUtil = require('blink-util')
-
+const db = require('./src/db/db')
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev })
+const MongoStore = require('connect-mongo')(session)
 
 const port = 3000
 
@@ -17,20 +18,24 @@ app
   .then(async () => {
     const server = express()
     let credential = await blinkUtil.fs.readJson('credential.json')
+    await db.ConnectOnce(credential.mongoUrl)
 
     app.cookieOptions = { maxAge: blinkUtil.date.week(1), httpOnly: true, signed: true, secure: dev ? false : true }
 
     server.use(bodyParser.json())
     server.use(bodyParser.urlencoded({ extended: true }))
     server.use(cookieParser(credential.secret))
-    server.use(sessionParser(
+    server.use(session(
       {
         resave: true,
-        saveUninitialized: false,
+        saveUninitialized: true,
         secret: credential.secret,
         cookie: {
-          maxAge: blinkUtil.date.day(1)
-        }
+          maxAge: blinkUtil.date.day(14)
+        },
+        store: new MongoStore({
+          mongooseConnection: db.con[credential.mongoUrl]
+        })
       }
     ))
     server.use("/api", await apiRouter.WithApp(app))

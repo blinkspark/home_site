@@ -28,11 +28,11 @@ const Index = props => {
             <React.Fragment key={v._id}>
               <PostInfo title={v.title} author={v.author} createDate={v.createDate} />
               <PostContent data={v.content} />
-              <ul class="nav mb-5">
-                <li class="nav-item">
+              <ul className="nav mb-5">
+                <li className="nav-item">
                   <a className="nav-link" href={`/editor?id=${v._id}`}>编辑</a>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <a className="nav-link" onClick={onDelete(v._id)} href="#">删除</a>
                 </li>
               </ul>
