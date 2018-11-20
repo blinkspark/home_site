@@ -51,6 +51,11 @@ module.exports = {
       }
     })
 
+    Router.get('/logout', (req, res) => {
+      req.session.user = null
+      res.redirect('/')
+    })
+
     // Router.post('/register', async (req, res) => {
     //   if (!req.body.password || !req.body.username) {
     //     app.render(req, res, '/_error', {}); return

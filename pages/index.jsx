@@ -5,13 +5,19 @@ import Head from "next/head"
 import Pagination from "../components/pagination"
 import React from 'react'
 import PostInfo from '../components/post_info'
+import Tag from '../components/tag'
+import * as R from 'ramda'
+
+axios.defaults.withCredentials = true
 
 const onDelete = (id) => {
   return (e) => {
     e.preventDefault()
-    axios.delete(`/api/posts/${id}`).then(
+    axios.delete(`/api/posts/${id}`).then(() => {
       location.reload()
-    )
+    }).catch(() => {
+      location.reload()
+    })
   }
 }
 
@@ -25,7 +31,7 @@ const Index = props => {
       <div className="container avoid-header">
         {props.contents.map((v) => {
           return (
-            <React.Fragment key={v._id}>
+            <div key={v._id}>
               <PostInfo title={v.title} author={v.author} createDate={v.createDate} />
               <PostContent data={v.content} />
               <ul className="nav mb-5">
@@ -36,8 +42,21 @@ const Index = props => {
                   <a className="nav-link" onClick={onDelete(v._id)} href="#">删除</a>
                 </li>
               </ul>
+              {
+                R.ifElse(
+                  R.isNil,
+                  R.always(''),
+                  () => (
+                    v.tags.map((o) => {
+                      return (
+                        <Tag key={o}>{o}</Tag>
+                      )
+                    })
+                  )
+                )(v.tags)
+              }
               <hr />
-            </React.Fragment>
+            </div>
           )
         })}
       </div>

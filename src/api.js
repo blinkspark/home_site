@@ -26,7 +26,14 @@ module.exports = {
     Router.get("/posts", async (req, res, next) => {
       try {
         await db.ConnectOnce(configJson.mongoUrl)
-        let articles = await ArticalModel.find({}).sort({ createDate: -1 })
+        let q = R.ifElse(
+          R.isNil,
+          R.always({ tags: 'Public' }),
+          R.always({})
+        )(R.path(['session', 'user'], req))
+        console.log(q)
+        console.log(req.session.user)
+        let articles = await ArticalModel.find(q).sort({ createDate: -1 })
         res.send(articles)
       } catch (error) {
         console.error(error)
@@ -51,8 +58,9 @@ module.exports = {
       } else {
         try {
           await db.ConnectOnce(configJson.mongoUrl)
-          let { title, content, author } = req.body
-          let article = await ArticalModel.create({ title, content, author })
+          console.log(req.body)
+          let { title, content, author, tags } = req.body
+          let article = await ArticalModel.create({ title, content, author, tags })
           res.redirect('/')
         } catch (error) {
           console.error(error)
@@ -68,12 +76,13 @@ module.exports = {
         try {
           await db.ConnectOnce(configJson.mongoUrl)
           console.log(req.body)
-          let { title, content, author } = req.body
+          let { title, content, author, tags } = req.body
           let article = await ArticalModel.findOne({ _id: req.params.id })
           if (!R.isNil(article)) {
             article.title = title
             article.content = content
             article.author = author
+            article.tags = tags
             await article.save()
             res.redirect('/')
           }
@@ -88,6 +97,7 @@ module.exports = {
     })
 
     Router.delete("/posts/:id", async (req, res) => {
+      console.log(req.session.user)
       if (R.isNil(req.session.user)) {
         res.redirect('/login')
       } else {

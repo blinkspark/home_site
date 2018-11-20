@@ -25,7 +25,7 @@ const Header = props => {
                     <a href="/editor" className="nav-link">Editor</a>
                   </li>
                   <li className="nav-item">
-                    <a href="/logout" className="nav-link">Logout</a>
+                    <a href="/api/users/logout" className="nav-link">Logout</a>
                   </li>
                 </React.Fragment> :
                 <li className="nav-item">
