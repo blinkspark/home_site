@@ -38,12 +38,6 @@ app
         })
       }
     ))
-    server.use('/api',(req,res,next)=>{
-      res.header('Access-Control-Allow-Origin', 'http://nealwang.top')
-      res.header('Access-Control-Allow-Credentials', 'true')
-      next()
-    })
-
 
     server.use("/api", await apiRouter.WithApp(app))
 

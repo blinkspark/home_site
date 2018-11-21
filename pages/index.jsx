@@ -71,21 +71,23 @@ Index.MaxPostPerPage = 5
 Index.getInitialProps = async function (v) {
   try {
     let page = v.query.page ? Number(v.query.page) : 1
-    let prefix = v.req != undefined ? `http://${v.req.headers.host}` : ""
-    let posts = await axios.get(`${prefix}/api/posts`)
+    let posts = R.ifElse(
+      R.isNil,
+      R.always([]),
+      R.always(v.req.articles)
+    )(v.req.articles)
     let postContents = []
-    for (
-      let i = (page - 1) * Index.MaxPostPerPage; i < posts.data.length; i++) {
+    for (let i = (page - 1) * Index.MaxPostPerPage; i < posts.length; i++) {
       if (i >= page * Index.MaxPostPerPage) {
         break
       }
-      let p = posts.data[i]
+      let p = posts[i]
       postContents.push(p)
     }
     return {
       contents: postContents,
       page: v.query.page ? v.query.page : 1,
-      totalPage: Math.ceil(posts.data.length / Index.MaxPostPerPage),
+      totalPage: Math.ceil(posts.length / Index.MaxPostPerPage),
       user: v.req.session.user
     }
   } catch (error) {
