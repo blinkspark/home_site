@@ -1,6 +1,5 @@
 const express = require("express")
 const next = require("next")
-const apiRouter = require("./src/api")
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const rootRouter = require('./src/root')
@@ -20,7 +19,7 @@ app
     let credential = await blinkUtil.fs.readJson('credential.json')
     await db.ConnectOnce(credential.mongoUrl)
 
-    app.cookieOptions = { maxAge: blinkUtil.date.week(1), httpOnly: true, signed: true, secure: dev ? false : true }
+    app.cookieOptions = { maxAge: blinkUtil.date.week(2), httpOnly: true, signed: true, secure: dev ? false : true }
 
     server.use(bodyParser.json())
     server.use(bodyParser.urlencoded({ extended: true }))
@@ -31,15 +30,13 @@ app
         saveUninitialized: true,
         secret: credential.secret,
         cookie: {
-          maxAge: blinkUtil.date.day(14)
+          maxAge: blinkUtil.date.week(2)
         },
         store: new MongoStore({
           mongooseConnection: db.con[credential.mongoUrl]
         })
       }
     ))
-
-    server.use("/api", await apiRouter.WithApp(app))
 
     server.use('/', await rootRouter.WithApp(app))
 
