@@ -32,6 +32,7 @@ const About = ({ }) => {
         <div className="small-12 medium-8 cell">
           <h4 className="separator-left">Neal Wang</h4>
           <p>I have 5+ years of experience in software development, particularly around web and game projects. Skills include html, css, Javascript, React, Nextjs, NodeJs, express, C++, go, Java, Android, iOS, etc.</p>
+          <p>This is a site created by NextJs, foundation, express. In order to showcase what I can do.</p>
         </div>
       </div>
     </div>
