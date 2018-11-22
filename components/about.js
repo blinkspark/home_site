@@ -6,7 +6,7 @@ const About = ({ }) => {
       <div className="grid-x grid-margin-x">
         <div className="small-12 medium-4 cell">
           <div className="author-image">
-            <img src="https://storage.googleapis.com/home-site-storage/image/Me.webp" />
+            <img src="https://storage.googleapis.com/home-site-storage/image/Me.JPEG" />
           </div>
           <div className="author-social">
             <a href="#">
