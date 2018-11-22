@@ -15,7 +15,7 @@ app
   .then(async () => {
     const server = express()
     let credential = await blinkUtil.fs.readJson('credential.json')
-    await db.ConnectOnce(credential.mongoUrl)
+    // await db.ConnectOnce(credential.mongoUrl)
 
     app.cookieOptions = { maxAge: blinkUtil.date.week(2), httpOnly: true, signed: true, secure: dev ? false : true }
 

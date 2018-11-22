@@ -1,6 +1,6 @@
 import React from 'react'
 import About from '../components/about'
-import '../static/scss/fullscreenhero.scss'
+import '../static/scss/fullscreen-hero.scss'
 
 const Index = ({ }) => {
   return (
@@ -22,7 +22,7 @@ const Index = ({ }) => {
 
         <div className="middle-content-section">
           <h1 className="text-shadow">Welcom To My Blog</h1>
-          <a className="button large" href="#">Blog</a>
+          <a className="button large" href="/blog">Blog</a>
           <a className="button large" href="#main-content-section">About Me</a>
         </div>
 
