@@ -1,0 +1,19 @@
+@import "../../scss/reboot";
+@import '../../node_modules/bootstrap/scss/button-group';
+@import '../../node_modules/bootstrap/scss/buttons';
+.fullscreen-hero {
+  height: 100vh;
+  background: url("https://storage.nealwang.top/home-site-storage/image/Hero.JPEG") center center no-repeat;
+  background-size: cover;
+  color: $white;
+  display: flex;
+  align-items: center;
+  .center-content {
+    width: 100%;
+    text-align: center;
+    .title {
+      text-shadow: 2px 2px 4px black;
+      font-size: 2em;
+    }
+  }
+}

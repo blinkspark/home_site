@@ -1,0 +1,24 @@
+@import "../../scss/reboot";
+@import '../../node_modules/bootstrap/scss/grid';
+@import '../../node_modules/bootstrap/scss/utilities';
+
+.resposiv-pic{
+  width: 100%;
+  height: auto;
+}
+
+.about-title{
+  text-transform: uppercase;
+}
+
+.detail-title{
+  font-weight: 400;
+  &:after{
+    clear: both;
+    border-bottom: 0.125rem solid #1779ba;
+    display: block;
+    margin-top: 0.5rem;
+    width: 8rem;
+    content: ' ';
+  }
+}
