@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const util = require('blink-util')
 
 const Schema = mongoose.Schema
 
@@ -6,7 +7,7 @@ const expire = (hours) => {
   return () => Date.now() + hours * 1000 * 60 * 60
 }
 
-let ArticleSchema = new Schema({
+const ArticleSchema = new Schema({
   title: String,
   author: String,
   createDate: { type: Date, default: Date.now },
@@ -14,16 +15,16 @@ let ArticleSchema = new Schema({
   content: String,
   tags: [String]
 })
-let ArticalModel = mongoose.model('Article', ArticleSchema)
+const ArticalModel = mongoose.model('Article', ArticleSchema)
 
-let UserSchema = new Schema({
+const UserSchema = new Schema({
   username: String,
   password: String,
   accessToken: String,
-  expiresOn: { type: Date, default: expire(24 * 2) }
+  expiresOn: { type: Date, default: () => util.date.expireOn(util.date.week(2)) }
 })
-let UserModel = mongoose.model('User', UserSchema)
+const UserModel = mongoose.model('User', UserSchema)
 
 module.exports = {
-  ArticalModel, UserModel
+  ArticalModel, UserModel, TranslateModel
 }

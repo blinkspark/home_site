@@ -11,13 +11,6 @@ module.exports = {
   */
   WithApp: async function (app) {
     let Router = express.Router()
-    const handle = app.getRequestHandler()
-
-    let cred = await util.fs.readJson('credential.json')
-
-    Router.get('*', (req, res) => {
-      handle(req, res)
-    })
 
     return Router
   }
