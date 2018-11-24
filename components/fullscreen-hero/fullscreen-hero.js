@@ -6,7 +6,7 @@ const FullScreenHero = ({ title, blogText, aboutText }) => {
       <div className="center-content">
         <h2 className="title">{title}</h2>
         <div className="btn-group">
-          <a className="btn btn-info">{blogText}</a>
+          <a className="btn btn-info" href="/blog">{blogText}</a>
           <a className="btn btn-info" href="#about">{aboutText}</a>
         </div>
       </div>
