@@ -1,19 +1,21 @@
-@import "../../scss/reboot";
+@import '../../pages/reboot';
 @import '../../node_modules/bootstrap/scss/grid';
-@import '../../node_modules/bootstrap/scss/utilities';
-
-.resposiv-pic{
+.my-pic {
   width: 100%;
-  height: auto;
 }
 
-.about-title{
+.pt {
+  padding-top: 1rem;
+}
+
+.title {
   text-transform: uppercase;
+  padding-left: 1rem;
 }
 
-.info-title{
+.info-title {
   font-weight: 400;
-  &:after{
+  &:after {
     clear: both;
     border-bottom: 0.125rem solid #1779ba;
     display: block;
