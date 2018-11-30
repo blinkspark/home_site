@@ -1,16 +1,20 @@
 import css from './full-screen-hero.scss'
+import React, { Component } from 'react'
 
-const FullScreenHero = ({ title, aboutID }) => {
-  return (
-    <div className={css.fullScreenHero}>
-      <div className={css.centerContent}>
-        <h1 className={css.title}>{title}</h1>
-        <div className={css.btnGroup}>
-          <a className={[css.btn, css.btnInfo].join(' ')} href="#">Demos</a>
-          <a className={[css.btn, css.btnInfo].join(' ')} href={`#${aboutID}`}>About</a>
+export default class fullScreenHero extends Component {
+  render() {
+    let { title, btns } = this.props
+    return (
+      <div className={css.fullScreenHero}>
+        <div className={css.centerContent}>
+          <h1 className={css.title}>{title}</h1>
+          <div className={css.btnGroup}>
+            {btns.map((v, i) =>
+              <a className={[css.btn, css.btnInfo].join(' ')} href={v.href} key={i}>{v.content}</a>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
-export default FullScreenHero
