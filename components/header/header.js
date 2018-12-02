@@ -13,9 +13,10 @@ export class CollapseBtn extends Component {
   }
 
   onClick(e) {
-    this.setState(s => ({ isCollapse: !s.isCollapse }))
+    let newIsCollapse = !this.state.isCollapse
+    this.setState(s => ({ isCollapse: newIsCollapse }))
     if (this.props.onClick) {
-      e.isCollapse = !this.state.isCollapse
+      e.isCollapse = newIsCollapse
       this.props.onClick(e)
     }
   }
@@ -68,7 +69,7 @@ export default class Header extends Component {
       isCollapse: true
     }
   }
-  onClick(e) {
+  onCollapseClick(e) {
     e.preventDefault()
     this.setState(s => ({ isCollapse: e.isCollapse }))
   }
@@ -76,9 +77,9 @@ export default class Header extends Component {
     const { brand, list } = this.props
     let navClasses = [css.navbar, css.navbarExpandLg, css.navbarDark, css.bgCustom]
     return (
-      <nav className={navClasses.join(' ')}>
+      <nav ref='root' className={navClasses.join(' ')}>
         <div className={css.container}>
-          <CollapseBtn onClick={this.onClick.bind(this)}></CollapseBtn>
+          <CollapseBtn onClick={this.onCollapseClick.bind(this)}></CollapseBtn>
           <CollapseList brand={brand} list={list} isCollapse={this.state.isCollapse} />
         </div>
       </nav>

@@ -4,6 +4,7 @@ import Header from '../../components/header/header'
 import Card from '../../components/card/card'
 import Container from '../../components/container/container'
 import Row from '../../components/row/row'
+import About from '../../components/about/about'
 
 export default class Demos extends Component {
   render() {
@@ -22,19 +23,25 @@ export default class Demos extends Component {
         <Container>
           <Row>
             <div className={col.join(' ')}>
-              <Card width={width} />
+              <Card img={{ src: "https://storage.nealwang.top/home-site-storage/image/Hero.JPEG" }}
+                title='Blog' content='A blog demo'
+                btn={{ href: '/demos/blog', content: 'Blog' }} />
             </div>
             <div className={col.join(' ')}>
-              <Card width={width} />
+              <Card img={{ src: "https://storage.nealwang.top/home-site-storage/image/Hero.JPEG" }} title='Demo' content='My Demo is awesome' btn={{ href: '#', content: 'test' }} />
             </div>
             <div className={col.join(' ')}>
-              <Card width={width} />
+              <Card img={{ src: "https://storage.nealwang.top/home-site-storage/image/Hero.JPEG" }} title='Demo' content='My Demo is awesome' btn={{ href: '#', content: 'test' }} />
             </div>
             <div className={col.join(' ')}>
-              <Card width={width} />
+              <Card img={{ src: "https://storage.nealwang.top/home-site-storage/image/Hero.JPEG" }} title='Demo' content='My Demo is awesome' btn={{ href: '#', content: 'test' }} />
             </div>
           </Row>
         </Container>
+        <About id='about' aboutTitle='About Me' infoTitle='Neal Wang' pic={{ src: 'https://storage.nealwang.top/home-site-storage/image/Me.JPEG', alt: 'Me' }}>
+          <p>I have 5+ years of experience in software development, particularly around web and game projects. Skills include html, css, Javascript, React, Nextjs, NodeJs, express, C++, go, Java, Android, iOS, etc.</p>
+          <p>This is a site created by NextJs, Bootstrap, and Express. In order to showcase what I can do.</p>
+        </About>
       </React.Fragment>
     )
   }

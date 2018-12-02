@@ -1,0 +1,28 @@
+@import '../../pages/reboot';
+.title {
+  text-align: center;
+}
+
+.blog-meta {
+  font-weight: 300;
+  color: darkgray;
+  strong {
+    color: black;
+  }
+}
+
+.blog-content{
+  &:before{
+    clear: both;
+    border-bottom: 0.09rem solid gray;
+    display: block;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 50%;
+    content: ' ';
+  }
+  img{
+    width: 100%;
+  }
+  margin-bottom: 1rem;
+}
