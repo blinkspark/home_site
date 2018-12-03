@@ -1,6 +1,8 @@
 import css from './header.scss'
 import React, { Component, Fragment } from 'react'
 import * as R from 'ramda'
+import PropTypes from 'prop-types'
+import Link from 'next/link'
 
 export class CollapseBtn extends Component {
   constructor(props) {
@@ -53,7 +55,9 @@ export class CollapseList extends Component {
         <ul className={[css.navbarNav, css.mrAuto, css.mt2, css.mtLg0].join(' ')}>
           {R.isNil(list) ? '' : list.map(v =>
             <li className={css.navItem} key={v.content}>
-              <a className={css.navLink} href={v.href}>{v.content}</a>
+              <Link href={v.href} passHref={true}>
+                <a className={css.navLink}>{v.content}</a>
+              </Link>
             </li>
           )}
         </ul>
@@ -63,6 +67,12 @@ export class CollapseList extends Component {
 }
 
 export default class Header extends Component {
+  static propTypes = {
+    isFixedTop: PropTypes.bool
+  }
+  static defaultProps = {
+    isFixedTop: false
+  }
   constructor(props) {
     super(props)
     this.state = {
@@ -74,8 +84,11 @@ export default class Header extends Component {
     this.setState(s => ({ isCollapse: e.isCollapse }))
   }
   render() {
-    const { brand, list } = this.props
+    const { brand, list, isFixedTop } = this.props
     let navClasses = [css.navbar, css.navbarExpandLg, css.navbarDark, css.bgCustom]
+    if (isFixedTop) {
+      navClasses.push(css.fixedTop)
+    }
     return (
       <nav ref='root' className={navClasses.join(' ')}>
         <div className={css.container}>

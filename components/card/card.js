@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
 import css from './card.scss'
+import PropTypes from 'prop-types'
+import Link from 'next/link'
 
 export default class Card extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    content: PropTypes.string,
+  }
+  static defaultProps = {
+    title: 'Demo',
+    content: 'My demo is awesome!',
+  }
   render() {
     let { img, title, content, btn } = this.props
     return (
@@ -11,7 +21,9 @@ export default class Card extends Component {
           <div className={css.cardBody}>
             <h5 className={css.cardTitle}>{title}</h5>
             <p className={css.cardText}>{content}</p>
-            <a href={btn.href} className={[css.btn, css.btnPrimary].join(' ')}>{btn.content}</a>
+            <Link href={btn.href} passHref={true}>
+              <a className={[css.btn, css.btnPrimary].join(' ')}>{btn.content}</a>
+            </Link>
           </div>
         </div>
       </div>

@@ -11,13 +11,13 @@ export default class Nav extends Component {
   static defaultProps = {
     classes: [],
     list: [
-      { href: '#', content: 'Link', level: 0 },
-      { href: '#', content: 'Link', level: 1 },
-      { href: '#', content: 'Link', level: 1 },
-      { href: '#', content: 'Link', level: 1 },
-      { href: '#', content: 'Link', level: 0 },
-      { href: '#', content: 'Link', level: 1 },
-      { href: '#', content: 'Link', level: 1 },
+      { href: '#', content: 'Lorem ipsum dolor sit amet.', level: 0 },
+      { href: '#', content: 'Lorem ipsum dolor sit amet.', level: 1 },
+      { href: '#', content: 'Lorem ipsum dolor sit amet.', level: 1 },
+      { href: '#', content: 'Lorem ipsum dolor sit amet.', level: 1 },
+      { href: '#', content: 'Lorem ipsum dolor sit amet.', level: 0 },
+      { href: '#', content: 'Lorem ipsum dolor sit amet.', level: 1 },
+      { href: '#', content: 'Lorem ipsum dolor sit amet.', level: 1 },
     ]
   }
 
@@ -28,7 +28,7 @@ export default class Nav extends Component {
       <ul className={classes.join(' ')}>
         {list.map((v, i) => {
           return (
-            <li className={css.navItem}>
+            <li className={css.navItem} key={i}>
               <a className={[css.navLinkSm]} href={v.href} style={{ marginLeft: `${v.level * 2}rem`, marginTop: `${v.level === 0 ? '0.8rem' : '0rem'}` }}>{v.content}</a>
             </li>
           )

@@ -23,12 +23,14 @@ export default class Demos extends Component {
         <Container>
           <Row>
             <div className={col.join(' ')}>
-              <Card img={{ src: "https://storage.nealwang.top/home-site-storage/image/Hero.JPEG" }}
+              <Card img={{ src: "https://storage.nealwang.top/home-site-storage/image/blog.jpg" }}
                 title='Blog' content='A blog demo'
                 btn={{ href: '/demos/blog', content: 'Blog' }} />
             </div>
             <div className={col.join(' ')}>
-              <Card img={{ src: "https://storage.nealwang.top/home-site-storage/image/Hero.JPEG" }} title='Demo' content='My Demo is awesome' btn={{ href: '#', content: 'test' }} />
+              <Card img={{ src: "https://storage.nealwang.top/home-site-storage/image/signin.jpg" }}
+                title='Sign In' content='A sign in demo'
+                btn={{ href: '/demos/signin#signin', content: 'Sign In' }} />
             </div>
             <div className={col.join(' ')}>
               <Card img={{ src: "https://storage.nealwang.top/home-site-storage/image/Hero.JPEG" }} title='Demo' content='My Demo is awesome' btn={{ href: '#', content: 'test' }} />

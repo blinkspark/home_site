@@ -7,20 +7,23 @@ export default class Button extends Component {
   static propTypes = {
     href: PropTypes.string,
     classes: PropTypes.arrayOf(PropTypes.string),
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    isBlock: PropTypes.bool
   }
 
   static defaultProps = {
     href: '#',
     classes: [],
-    onClick: function (e) { }
+    onClick: function (e) { },
+    isBlock: false,
   }
 
   render() {
-    let { children, href, onClick, classes } = this.props
-    classes = R.concat([css.btn], classes)
+    let { children, href, onClick, isBlock, classes } = this.props
+    classes = R.concat([css.btn, css.btnPrimary], classes)
+    let style = isBlock ? { display: 'block' } : {}
     return (
-      <a className={classes.join(' ')} href={href} onClick={onClick} style={{ display: 'block' }}>{children}</a>
+      <a className={classes.join(' ')} href={href} onClick={onClick} style={style}>{children}</a>
     )
   }
 }

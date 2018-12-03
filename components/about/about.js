@@ -11,7 +11,7 @@ export default class componentName extends Component {
   render() {
     let { id, aboutTitle, infoTitle, pic, children } = this.props
     return (
-      <div className={[css.containerFluid, css.bgLight].join(' ')} id={id} style={{ marginTop: '3rem' }}>
+      <div className={[css.containerFluid, css.bgLight].join(' ')} id={id}>
         <div className={css.row}>
           <h2 className={css.title}>{aboutTitle}</h2>
         </div>

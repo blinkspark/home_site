@@ -34,18 +34,18 @@ export default class Blog extends Component {
     ]
     return (
       <React.Fragment>
-        <Header ref='header' brand={brand} list={list} />
-        <Container headerHeight={this.state.headerHeight} avoidHeader={false}>
+        <Header ref='header' brand={brand} list={list} isFixedTop={true} />
+        <Container headerHeight={this.state.headerHeight} avoidHeader={true}>
           <Row>
             <div className={[css.colMd9, css.colSm12].join(' ')}>
               <BlogPost classes={[css.mt2]} />
               <Row>
-                <Button classes={[css.mrAuto]}>Previous</Button>
+                <Button classes={[css.mrAuto, css.btnInfo]}>Previous</Button>
                 <Button classes={[css.mlAuto]}>Next</Button>
               </Row>
             </div>
             <div className={[css.colMd3, css.colSm12].join(' ')}>
-              <Nav classes={[css.positionSticky, css.stickyTop]} />
+              <Nav classes={[css.stickyTop]} />
             </div>
           </Row>
         </Container>
