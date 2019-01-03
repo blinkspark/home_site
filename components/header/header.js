@@ -1,101 +1,70 @@
-import css from './header.scss'
-import React, { Component, Fragment } from 'react'
-import * as R from 'ramda'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 
-export class CollapseBtn extends Component {
-  constructor(props) {
-    super(props)
-    this.defaultClasses = [css.navbarToggler]
-    this.collapsedClasses = [css.navbarToggler]
-    this.state = {
-      isCollapse: true,
-    }
+export class NavbarItem extends Component {
+  static propTypes = {
+    href: PropTypes.string,
   }
-
-  onClick(e) {
-    let newIsCollapse = !this.state.isCollapse
-    this.setState(s => ({ isCollapse: newIsCollapse }))
-    if (this.props.onClick) {
-      e.isCollapse = newIsCollapse
-      this.props.onClick(e)
-    }
+  static defaultProps = {
+    href: '#',
   }
 
   render() {
-    const btnClasses = this.state.isCollapse ? this.collapsedClasses : this.defaultClasses
+    let { href, children } = this.props
     return (
-      <button className={btnClasses.join(' ')}
-        type="button" onClick={this.onClick.bind(this)}>
-        <span className={css.navbarTogglerIcon}></span>
-      </button>
+      <li className="nav-item">
+        <Link href={href} passHref={true}>
+          <a className="nav-link">{children}</a>
+        </Link>
+      </li>
     )
   }
 }
 
 
-export class CollapseList extends Component {
-  constructor(props) {
-    super(props)
-  }
 
-  render() {
-    const collapseDefaultClasses = [
-      css.collapse, css.navbarCollapse
-    ]
-    const collapseShowClasses = [
-      css.collapse, css.navbarCollapse, css.show
-    ]
-    let { brand, list, isCollapse } = this.props
-    let listClasses = isCollapse ? collapseDefaultClasses : collapseShowClasses
-    return (
-      <div className={listClasses.join(' ')} >
-        {R.isNil(brand) ? '' : <a className={css.navbarBrand} href={brand.href}>{brand.content}</a>}
-        <ul className={[css.navbarNav, css.mrAuto, css.mt2, css.mtLg0].join(' ')}>
-          {R.isNil(list) ? '' : list.map(v =>
-            <li className={css.navItem} key={v.content}>
-              <Link href={v.href} passHref={true}>
-                <a className={css.navLink}>{v.content}</a>
-              </Link>
-            </li>
-          )}
-        </ul>
-      </div>
-    )
-  }
-}
 
 export default class Header extends Component {
   static propTypes = {
-    isFixedTop: PropTypes.bool
+    brand: PropTypes.object,
+    list: PropTypes.array
   }
   static defaultProps = {
-    isFixedTop: false
-  }
-  constructor(props) {
-    super(props)
-    this.state = {
-      isCollapse: true
-    }
-  }
-  onCollapseClick(e) {
-    e.preventDefault()
-    this.setState(s => ({ isCollapse: e.isCollapse }))
+    brand: { href: '/', content: 'Neal Wang' },
+    list: [
+      { href: '/', content: 'Blog' },
+      { href: '/checklist', content: 'Checklist' },
+    ]
   }
   render() {
-    const { brand, list, isFixedTop } = this.props
-    let navClasses = [css.navbar, css.navbarExpandLg, css.navbarDark, css.bgCustom]
-    if (isFixedTop) {
-      navClasses.push(css.fixedTop)
-    }
+    let { brand, list } = this.props
     return (
-      <nav ref='root' className={navClasses.join(' ')}>
-        <div className={css.container}>
-          <CollapseBtn onClick={this.onCollapseClick.bind(this)}></CollapseBtn>
-          <CollapseList brand={brand} list={list} isCollapse={this.state.isCollapse} />
-        </div>
-      </nav>
+      <header>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="container">
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+              <Link href={brand.href} passHref={true}>
+                <a className="navbar-brand">{brand.content}</a>
+              </Link>
+              <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+                {list.map((v, i) => {
+                  return (
+                    <NavbarItem key={i} href={v.href}>{v.content}</NavbarItem>
+                  )
+                })}
+              </ul>
+              {/* <form className="form-inline my-2 my-lg-0">
+              <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> */}
+            </div>
+          </div>
+        </nav>
+      </header>
     )
   }
 }

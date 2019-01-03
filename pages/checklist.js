@@ -12,21 +12,18 @@ const Checklist = dynamic(
   }
 )
 
-export default class IndexPage extends Component {
-  componentWillMount = () => {
-
-  }
+export default class ChecklistPage extends Component {
   render() {
     return (
       <MainLayout>
         <Head>
-          <title>Neal Wang's Homesite</title>
+          <title>Blink Checklist</title>
         </Head>
+        <Checklist></Checklist>
         <div className="container">
-          <div className="row">
-            <div className="col-lg-9" style={{ backgroundColor: 'darkBlue', height: 100 }}></div>
-            <div className="col-lg-3" style={{ backgroundColor: 'darkGray', height: 100 }}></div>
-          </div>
+          <h3>About This</h3>
+          <p>This is a WebApp using indexedDB as storage layer.</p>
+          <p>Since all your data is stored in your browser, feel free to use this APP!</p>
         </div>
       </MainLayout>
     )
