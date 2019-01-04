@@ -1,15 +1,25 @@
 import React, { Fragment, Component } from 'react'
 // import Checklist from '../components/checklist/checklist'
 import dynamic from 'next/dynamic'
-import MainLayout from '../components/layouts/main-layout'
+import MainLayout from '../../components/layouts/main-layout'
 import Head from 'next/head'
 import axios from 'axios'
-import BlogPost from '../components/blog/blog-post'
+
+const BlogEditor = dynamic(
+  () => import('../../components/blog/blog-editor'),
+  {
+    ssr: false,
+    loading: () => <div className="container text-center"><h3>Loading...</h3></div>
+  }
+)
 
 export default class IndexPage extends Component {
+  componentWillMount = () => {
+
+  }
+
   static async getInitialProps({ }) {
     let res = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
-    console.log(res.data)
     return {
       data: res.data
     }
@@ -22,7 +32,7 @@ export default class IndexPage extends Component {
           <title>Neal Wang's Homesite</title>
         </Head>
         <div className="container my-3">
-          <BlogPost title={data.title} content={data.body}></BlogPost>
+          <BlogEditor title={data.title} content={data.body} action="https://jsonplaceholder.typicode.com/posts" method="post" />
         </div>
       </MainLayout>
     )

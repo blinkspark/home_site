@@ -33,8 +33,8 @@ export default class Header extends Component {
   static defaultProps = {
     brand: { href: '/', content: 'Neal Wang' },
     list: [
-      { href: '/', content: 'Blog' },
-      { href: '/checklist', content: 'Checklist' },
+      { href: '/blog/editor', content: 'Blog' },
+      { href: '/apps/checklist', content: 'Checklist' },
     ]
   }
   render() {

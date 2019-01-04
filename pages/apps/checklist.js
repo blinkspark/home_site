@@ -1,11 +1,11 @@
 import React, { Fragment, Component } from 'react'
 // import Checklist from '../components/checklist/checklist'
 import dynamic from 'next/dynamic'
-import MainLayout from '../components/layouts/main-layout'
+import MainLayout from '../../components/layouts/main-layout'
 import Head from 'next/head'
 
 const Checklist = dynamic(
-  () => import('../components/checklist/checklist'),
+  () => import('../../components/checklist/checklist'),
   {
     ssr: false,
     loading: () => <div className="container text-center"><h3>Loading...</h3></div>
