@@ -41,7 +41,7 @@ export default class BlogEditor extends Component {
     this.setState({
       isSaving: true
     })
-    let res = await axios({
+    /*let res = */await axios({
       method: this.props.method,
       url: this.props.action,
       data: {
@@ -52,7 +52,7 @@ export default class BlogEditor extends Component {
     this.setState({
       isSaving: false
     })
-    console.log(res)
+    // console.log(res)
     onSaveSuccess && onSaveSuccess()
   }
 
@@ -66,7 +66,7 @@ export default class BlogEditor extends Component {
           <div className="col-lg-6">
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span class="input-group-text">Title:</span>
+                <span className="input-group-text">Title:</span>
               </div>
               <input type="text" className="form-control bg-light text-dark" value={this.state.title} onChange={this.onTitleChange} />
             </div>

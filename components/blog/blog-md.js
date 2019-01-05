@@ -18,7 +18,7 @@ export default class BlogMd extends Component {
 
   render() {
     return (
-      <Md className={[css.markdown, 'text-dark'].join(' ')} source={this.props.source} />
+      <Md className={`${css.markdown} text-dark`} source={this.props.source} />
     )
   }
 }

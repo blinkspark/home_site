@@ -4,16 +4,29 @@ import dynamic from 'next/dynamic'
 import MainLayout from '../components/layouts/main-layout'
 import Head from 'next/head'
 import axios from 'axios'
-import BlogPost from '../components/blog/blog-post'
+import BlogList from '../components/blog/blog-list'
 
 export default class IndexPage extends Component {
   static async getInitialProps({ }) {
-    let res = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
+    let res = await axios.get('https://jsonplaceholder.typicode.com/posts')
     console.log(res.data)
     return {
       data: res.data
     }
   }
+
+  onDelete = id => async e => {
+    e.preventDefault()
+    let res = await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    console.log(res.data)
+    location.href = '/'
+  }
+
+  onEdit = id => e => {
+    e.preventDefault()
+    location.href = `/blog/editor?id=${id}`
+  }
+
   render() {
     let { data } = this.props
     return (
@@ -22,7 +35,7 @@ export default class IndexPage extends Component {
           <title>Neal Wang's Homesite</title>
         </Head>
         <div className="container my-3">
-          <BlogPost title={data.title} content={data.body}></BlogPost>
+          <BlogList blogs={data} onDelete={this.onDelete} onEdit={this.onEdit} />
         </div>
       </MainLayout>
     )

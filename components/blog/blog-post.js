@@ -7,6 +7,8 @@ export default class BlogPost extends Component {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -14,15 +16,19 @@ export default class BlogPost extends Component {
   }
 
   render() {
-    const { title, content, author } = this.props
+    const { title, content, author, onDelete, onEdit } = this.props
     return (
       <div className="card">
         <div className="card-header">
-          <h2 className="text-center">{title}</h2>
+          <h3 className="text-center">{title}</h3>
         </div>
         <div className="card-body">
           <div className="card-subtitle text-muted">Author: {author}</div>
           <Md source={content} />
+          <div className="text-right">
+            <a href="#" className="card-link" onClick={onEdit}>Edit</a>
+            <a href="#" className="card-link" onClick={onDelete}>Delete</a>
+          </div>
         </div>
       </div>
     )

@@ -18,21 +18,30 @@ export default class IndexPage extends Component {
 
   }
 
-  static async getInitialProps({ }) {
-    let res = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
-    return {
-      data: res.data
+  static async getInitialProps({ query }) {
+    console.log(query)
+    let ret = {}
+    if (query.id) {
+      let res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${query.id}`)
+      ret.data = res.data
+      ret.action = `https://jsonplaceholder.typicode.com/posts/${query.id}`
+      ret.method = 'put'
+    } else {
+      ret.data = {}
+      ret.action = `https://jsonplaceholder.typicode.com/posts`
+      ret.method = 'post'
     }
+    return ret
   }
   render() {
-    let { data } = this.props
+    let { data, action, method } = this.props
     return (
       <MainLayout>
         <Head>
           <title>Neal Wang's Homesite</title>
         </Head>
         <div className="container my-3">
-          <BlogEditor title={data.title} content={data.body} action="https://jsonplaceholder.typicode.com/posts" method="post" />
+          <BlogEditor title={data.title || ''} content={data.body || ''} action={action} method={method} onSaveSuccess={() => location.href = '/'} />
         </div>
       </MainLayout>
     )
