@@ -18,13 +18,13 @@ const ArticleSchema = new Schema({
 const ArticalModel = mongoose.model('Article', ArticleSchema)
 
 const UserSchema = new Schema({
-  username: String,
-  password: String,
+  username: { type: String, required: true },
+  password: { type: String, required: true },
   accessToken: String,
-  expiresOn: { type: Date, default: () => util.date.expireOn(util.date.week(2)) }
+  expiresOn: { type: Date }
 })
 const UserModel = mongoose.model('User', UserSchema)
 
 module.exports = {
-  ArticalModel, UserModel, TranslateModel
+  ArticalModel, UserModel
 }

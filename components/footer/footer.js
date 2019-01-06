@@ -15,6 +15,7 @@ export default class Footer extends Component {
                 <p>Made by Neal Wang.</p>
                 <p>Based on <a href="https://getbootstrap.com" rel="nofollow">Bootstrap</a>, <a href="https://nextjs.org/">Nextjs</a></p>
                 <p>Code released under the <a href="https://github.com/blinkspark/home_site/blob/master/LICENSE">MIT License</a>.</p>
+                <p>Copyright 2018-{new Date().getFullYear()} Neal Wang. All rights reserved.</p>
               </div>
             </div>
             <div className="col-lg-4">

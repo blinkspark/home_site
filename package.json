@@ -49,7 +49,6 @@
       "pages/*",
       "components/*",
       "static/*"
-    ],
-    "delay": "2000"
+    ]
   }
 }

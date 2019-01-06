@@ -9,7 +9,6 @@ import BlogList from '../components/blog/blog-list'
 export default class IndexPage extends Component {
   static async getInitialProps({ }) {
     let res = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    console.log(res.data)
     return {
       data: res.data
     }
@@ -17,8 +16,7 @@ export default class IndexPage extends Component {
 
   onDelete = id => async e => {
     e.preventDefault()
-    let res = await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
-    console.log(res.data)
+    await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
     location.href = '/'
   }
 

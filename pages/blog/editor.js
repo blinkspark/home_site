@@ -13,7 +13,7 @@ const BlogEditor = dynamic(
   }
 )
 
-export default class IndexPage extends Component {
+export default class EditorPage extends Component {
   componentWillMount = () => {
 
   }

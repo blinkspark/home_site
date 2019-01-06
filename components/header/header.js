@@ -1,21 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
+import UserNav from './user-nav'
 
 export class NavbarItem extends Component {
   static propTypes = {
-    href: PropTypes.string,
+    href: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
   }
   static defaultProps = {
     href: '#',
+    onClick: () => { }
   }
 
   render() {
-    let { href, children } = this.props
+    let { href, children, onClick } = this.props
     return (
       <li className="nav-item">
         <Link href={href} passHref={true}>
-          <a className="nav-link">{children}</a>
+          <a className="nav-link" onClick={onClick}>{children}</a>
         </Link>
       </li>
     )
@@ -57,10 +60,7 @@ export default class Header extends Component {
                   )
                 })}
               </ul>
-              {/* <form className="form-inline my-2 my-lg-0">
-              <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form> */}
+              <UserNav />
             </div>
           </div>
         </nav>
