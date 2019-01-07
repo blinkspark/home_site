@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
 router.post('/verify', async (req, res) => {
   try {
     await db.ConnectOnce(req.app.credential.mongoUrl)
-    let user = await UserModel.findOne({ username: req.body.username, accessToken: req.body.accessToken })
+    let user = await UserModel.findOne({ accessToken: req.body.accessToken })
     res.json({ ok: user ? true : false })
   } catch (error) {
     console.log(error)

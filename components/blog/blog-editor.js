@@ -3,6 +3,7 @@ import css from './md.scss'
 import Md from './blog-md'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import * as R from 'ramda'
 
 
 export default class BlogEditor extends Component {
@@ -30,6 +31,24 @@ export default class BlogEditor extends Component {
     })
   }
 
+  onEditorKeyDown = e => {
+    if (e.keyCode === 9) {
+      e.preventDefault()
+      let ele = e.target
+      let start = ele.selectionStart
+      let end = ele.selectionEnd
+      let spl = R.splitAt(start, this.state.content)
+      spl[1] = R.splitAt(end - start, spl[1])[1]
+      this.setState({
+        content: spl[0] + '    ' + spl[1]
+      }, () => {
+        ele.selectionStart = start + 4
+        ele.selectionEnd = start + 4
+      })
+
+    }
+  }
+
   onTitleChange = e => {
     this.setState({
       title: e.target.value
@@ -41,13 +60,15 @@ export default class BlogEditor extends Component {
     this.setState({
       isSaving: true
     })
-    /*let res = */await axios({
+    let user = JSON.parse(window.localStorage.getItem('user'))
+    let res = await axios({
       method: this.props.method,
       url: this.props.action,
       data: {
         title: this.state.title,
-        body: this.state.content,
-      }
+        content: this.state.content,
+        accessToken: user.accessToken,
+      },
     })
     this.setState({
       isSaving: false
@@ -74,7 +95,7 @@ export default class BlogEditor extends Component {
               <textarea className="form-control bg-light text-dark"
                 spellCheck={false} wrap="soft" rows="25"
                 style={{ resize: "none" }}
-                value={this.state.content} onChange={this.onEditorChanged}></textarea>
+                value={this.state.content} onChange={this.onEditorChanged} onKeyDown={this.onEditorKeyDown} ></textarea>
             </div>
           </div>
           <div className="col-lg-6">

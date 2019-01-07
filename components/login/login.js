@@ -32,8 +32,15 @@ export default class Login extends Component {
     })
   }
 
+  onPasswdKeyDown = e => {
+    if (e.keyCode === 13/** enter */) {
+      e.preventDefault()
+      this.props.onLoginClicked()
+    }
+  }
+
   onLoginClicked = async e => {
-    e.preventDefault()
+    e && e.preventDefault()
     this.setState({
       pending: true
     })
@@ -73,7 +80,7 @@ export default class Login extends Component {
                 </div>
                 <div className="input-group">
                   {/* <label className="sr-only" htmlFor="password">Password</label> */}
-                  <input className="form-control" type="password" id="password" placeholder="Password" value={this.state.password} onChange={this.onPasswdChange} />
+                  <input className="form-control" type="password" id="password" placeholder="Password" value={this.state.password} onChange={this.onPasswdChange} onKeyDown={this.onPasswdKeyDown} />
                 </div>
                 <div className="input-group mt-4">
                   <button className="form-control bg-primary text-white" onClick={this.onLoginClicked}>

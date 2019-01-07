@@ -8,11 +8,11 @@ const expire = (hours) => {
 }
 
 const ArticleSchema = new Schema({
-  title: String,
+  title: { type: String, required: true },
   author: String,
   createDate: { type: Date, default: Date.now },
   fixedTop: Boolean,
-  content: String,
+  content: { type: String, required: true },
   tags: [String]
 })
 const ArticalModel = mongoose.model('Article', ArticleSchema)

@@ -17,9 +17,9 @@ export default class BlogList extends Component {
     return (
       <div className="list-group-flush">
         {blogs.map(v =>
-          <div className="mb-3" key={v.id}>
-            <BlogPost title={v.title} content={v.body}
-              onDelete={onDelete(v.id)} onEdit={onEdit(v.id)} />
+          <div className="mb-3" key={v._id}>
+            <BlogPost title={v.title} content={v.content}
+              onDelete={onDelete(v._id)} onEdit={onEdit(v._id)} />
           </div>)}
       </div>
     )

@@ -1,36 +1,85 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../db/db')
-const { UserModel } = require('../db/Modals')
+const { UserModel, ArticalModel } = require('../db/Modals')
 const butil = require('blink-util')
 const bcrypt = require('bcrypt')
 const fs = require('fs')
 const util = require('util')
-
-let writeFile = util.promisify(fs.writeFile)
-
-const c = {
-  inst: null,
-  getConfig: async () => {
-    if (!this.inst) {
-      this.inst = await butil.fs.readJson('credential.json')
-    }
-    return this.inst
-  }
-}
+const { verifyAccessToken } = require('./util')
 
 router.get('/posts', async (req, res) => {
   try {
-    let config = await c.getConfig()
+    let config = req.app.credential
     await db.ConnectOnce(config.mongoUrl)
-    let user = await UserModel.create({
-      username: 'test',
-      password: await bcrypt.hash('123456', 11),
-      accessToken: await bcrypt.hash('test', 10),
-      expiresOn: butil.date.expireOn(butil.date.week(2))()
-    })
-    console.log(req.app.set)
-    res.send(user)
+    let articles = await ArticalModel.find({})
+    res.json(articles)
+  } catch (error) {
+    console.log(error)
+    res.status(503).send(error)
+  }
+})
+
+router.get('/posts/:id', async (req, res) => {
+  try {
+    let config = req.app.credential
+    await db.ConnectOnce(config.mongoUrl)
+    let article = await ArticalModel.findOne({ _id: req.params.id })
+    res.json(article)
+  } catch (error) {
+    console.log(error)
+    res.status(503).send(error)
+  }
+})
+
+router.put('/posts/:id', async (req, res) => {
+  try {
+    let config = req.app.credential
+    await db.ConnectOnce(config.mongoUrl)
+    if (await verifyAccessToken(config.mongoUrl, req.body.accessToken)) {
+      let article = await ArticalModel.findOne({ _id: req.params.id })
+      article.title = req.body.title
+      article.content = req.body.content
+      await article.save()
+      res.json({ ok: true })
+    } else {
+      res.json({ ok: false })
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(503).send(error)
+  }
+})
+
+router.delete('/posts/:id', async (req, res) => {
+  try {
+    let config = req.app.credential
+    await db.ConnectOnce(config.mongoUrl)
+    if (await verifyAccessToken(config.mongoUrl, req.query.accessToken)) {
+      await ArticalModel.deleteOne({ _id: req.params.id })
+      res.json({ ok: true })
+    } else {
+      res.json({ ok: false })
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(503).send(error)
+  }
+})
+
+router.post('/posts', async (req, res) => {
+  try {
+    let config = req.app.credential
+    await db.ConnectOnce(config.mongoUrl)
+    if (await verifyAccessToken(config.mongoUrl, req.body.accessToken)) {
+      let article = await ArticalModel.create({
+        title: req.body.title,
+        content: req.body.content
+      })
+      res.json({ ok: true })
+    } else {
+      res.json({ ok: false })
+    }
   } catch (error) {
     console.log(error)
     res.status(503).send(error)

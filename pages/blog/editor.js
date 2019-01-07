@@ -19,19 +19,19 @@ export default class EditorPage extends Component {
   }
 
   static async getInitialProps({ query }) {
-    console.log(query)
-    let ret = {}
+    let props = {}
     if (query.id) {
-      let res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${query.id}`)
-      ret.data = res.data
-      ret.action = `https://jsonplaceholder.typicode.com/posts/${query.id}`
-      ret.method = 'put'
+      let res = await axios.get(`http://localhost:3000/api/blog/posts/${query.id}`)
+      console.log(res.data)
+      props.data = res.data
+      props.action = `http://localhost:3000/api/blog/posts/${query.id}`
+      props.method = 'put'
     } else {
-      ret.data = {}
-      ret.action = `https://jsonplaceholder.typicode.com/posts`
-      ret.method = 'post'
+      props.data = {}
+      props.action = `http://localhost:3000/api/blog/posts`
+      props.method = 'post'
     }
-    return ret
+    return props
   }
   render() {
     let { data, action, method } = this.props
@@ -41,7 +41,7 @@ export default class EditorPage extends Component {
           <title>Neal Wang's Homesite</title>
         </Head>
         <div className="container my-3">
-          <BlogEditor title={data.title || ''} content={data.body || ''} action={action} method={method} onSaveSuccess={() => location.href = '/'} />
+          <BlogEditor title={data.title || ''} content={data.content || ''} action={action} method={method} onSaveSuccess={() => location.href = '/'} />
         </div>
       </MainLayout>
     )

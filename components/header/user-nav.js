@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { NavbarItem } from './header'
+import axios from 'axios'
 
 export default class UserNav extends Component {
   constructor(props) {
@@ -19,7 +20,6 @@ export default class UserNav extends Component {
     user && this.setState({
       user
     })
-    console.log(user)
   }
 
   onLogoutClicked = e => {
@@ -30,6 +30,13 @@ export default class UserNav extends Component {
     })
   }
 
+  onUserClicked = async e => {
+    e.preventDefault()
+    let user = JSON.parse(window.localStorage.getItem('user'))
+    let res = await axios.post('http://localhost:3000/api/user/verify', { accessToken: user.accessToken })
+    console.log(res.data)
+  }
+
   render() {
     let { user } = this.state
 
@@ -37,7 +44,7 @@ export default class UserNav extends Component {
       let { user } = props
       return (
         <React.Fragment>
-          <NavbarItem>{user.username}</NavbarItem>
+          <NavbarItem onClick={this.onUserClicked}>{user.username}</NavbarItem>
           <NavbarItem onClick={this.onLogoutClicked}>Logout</NavbarItem>
         </React.Fragment>
       )
