@@ -8,7 +8,7 @@ import BlogList from '../components/blog/blog-list'
 
 export default class IndexPage extends Component {
   static async getInitialProps({ }) {
-    let res = await axios.get('http://localhost:3000/api/blog/posts')
+    let res = await axios.get('https://nealwang.top/api/blog/posts')
     return {
       data: res.data
     }
@@ -17,7 +17,7 @@ export default class IndexPage extends Component {
   onDelete = id => async e => {
     e.preventDefault()
     let user = JSON.parse(window.localStorage.getItem('user'))
-    let res = await axios.delete(`http://localhost:3000/api/blog/posts/${id}?accessToken=${user.accessToken}`)
+    let res = await axios.delete(`https://nealwang.top/api/blog/posts/${id}?accessToken=${user.accessToken}`)
     console.log(res.data)
     location.href = '/'
   }

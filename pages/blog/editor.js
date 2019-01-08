@@ -21,14 +21,14 @@ export default class EditorPage extends Component {
   static async getInitialProps({ query }) {
     let props = {}
     if (query.id) {
-      let res = await axios.get(`http://localhost:3000/api/blog/posts/${query.id}`)
+      let res = await axios.get(`http://nealwang.top/api/blog/posts/${query.id}`)
       console.log(res.data)
       props.data = res.data
-      props.action = `http://localhost:3000/api/blog/posts/${query.id}`
+      props.action = `http://nealwang.top/api/blog/posts/${query.id}`
       props.method = 'put'
     } else {
       props.data = {}
-      props.action = `http://localhost:3000/api/blog/posts`
+      props.action = `http://nealwang.top/api/blog/posts`
       props.method = 'post'
     }
     return props

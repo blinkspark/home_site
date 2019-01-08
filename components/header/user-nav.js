@@ -31,10 +31,10 @@ export default class UserNav extends Component {
   }
 
   onUserClicked = async e => {
-    e.preventDefault()
-    let user = JSON.parse(window.localStorage.getItem('user'))
-    let res = await axios.post('http://localhost:3000/api/user/verify', { accessToken: user.accessToken })
-    console.log(res.data)
+    // e.preventDefault()
+    // let user = JSON.parse(window.localStorage.getItem('user'))
+    // let res = await axios.post('http://localhost:3000/api/user/verify', { accessToken: user.accessToken })
+    // console.log(res.data)
   }
 
   render() {

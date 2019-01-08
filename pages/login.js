@@ -20,7 +20,7 @@ export default class LoginPage extends Component {
   render() {
     return (
       <MainLayout>
-        <Login action='http://localhost:3000/api/user/login' onSuccess={this.onSuccess} onError={this.onError} />
+        <Login action='http://nealwang.top/api/user/login' onSuccess={this.onSuccess} onError={this.onError} />
       </MainLayout>
     )
   }
