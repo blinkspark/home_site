@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import MainLayout from '../../components/layouts/main-layout'
 import Head from 'next/head'
 import axios from 'axios'
+import {HOST} from '../../src/defines'
 
 const BlogEditor = dynamic(
   () => import('../../components/blog/blog-editor'),
@@ -12,8 +13,6 @@ const BlogEditor = dynamic(
     loading: () => <div className="container text-center"><h3>Loading...</h3></div>
   }
 )
-
-const HOST = 'https://nealwang.top'
 
 export default class EditorPage extends Component {
   componentWillMount = () => {

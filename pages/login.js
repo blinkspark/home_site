@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import MainLayout from '../components/layouts/main-layout'
 import Login from '../components/login/login'
-
-const HOST = 'https://nealwang.top'
+import {HOST} from '../src/defines'
 
 export default class LoginPage extends Component {
   static propTypes = {

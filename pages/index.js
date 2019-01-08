@@ -5,8 +5,7 @@ import MainLayout from '../components/layouts/main-layout'
 import Head from 'next/head'
 import axios from 'axios'
 import BlogList from '../components/blog/blog-list'
-
-const HOST = 'https://nealwang.top'
+import { HOST } from '../src/defines'
 
 export default class IndexPage extends Component {
   static async getInitialProps({ }) {
