@@ -13,6 +13,8 @@ const BlogEditor = dynamic(
   }
 )
 
+const HOST = 'https://nealwang.top'
+
 export default class EditorPage extends Component {
   componentWillMount = () => {
 
@@ -21,14 +23,14 @@ export default class EditorPage extends Component {
   static async getInitialProps({ query }) {
     let props = {}
     if (query.id) {
-      let res = await axios.get(`http://nealwang.top/api/blog/posts/${query.id}`)
+      let res = await axios.get(`${HOST}/api/blog/posts/${query.id}`)
       console.log(res.data)
       props.data = res.data
-      props.action = `http://nealwang.top/api/blog/posts/${query.id}`
+      props.action = `${HOST}/api/blog/posts/${query.id}`
       props.method = 'put'
     } else {
       props.data = {}
-      props.action = `http://nealwang.top/api/blog/posts`
+      props.action = `${HOST}/api/blog/posts`
       props.method = 'post'
     }
     return props

@@ -6,9 +6,11 @@ import Head from 'next/head'
 import axios from 'axios'
 import BlogList from '../components/blog/blog-list'
 
+const HOST = 'https://nealwang.top'
+
 export default class IndexPage extends Component {
   static async getInitialProps({ }) {
-    let res = await axios.get('https://nealwang.top/api/blog/posts')
+    let res = await axios.get(`${HOST}/api/blog/posts`)
     return {
       data: res.data
     }
@@ -17,7 +19,7 @@ export default class IndexPage extends Component {
   onDelete = id => async e => {
     e.preventDefault()
     let user = JSON.parse(window.localStorage.getItem('user'))
-    let res = await axios.delete(`https://nealwang.top/api/blog/posts/${id}?accessToken=${user.accessToken}`)
+    let res = await axios.delete(`${HOST}/api/blog/posts/${id}?accessToken=${user.accessToken}`)
     console.log(res.data)
     location.href = '/'
   }

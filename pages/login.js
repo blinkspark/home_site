@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import MainLayout from '../components/layouts/main-layout'
 import Login from '../components/login/login'
 
+const HOST = 'https://nealwang.top'
+
 export default class LoginPage extends Component {
   static propTypes = {
   }
@@ -20,7 +22,7 @@ export default class LoginPage extends Component {
   render() {
     return (
       <MainLayout>
-        <Login action='http://nealwang.top/api/user/login' onSuccess={this.onSuccess} onError={this.onError} />
+        <Login action={`${HOST}/api/user/login`} onSuccess={this.onSuccess} onError={this.onError} />
       </MainLayout>
     )
   }
