@@ -1,6 +1,9 @@
 const pkg = require('./package')
 
 module.exports = {
+  server: {
+    host: '0.0.0.0'
+  },
   mode: 'universal',
 
   /*
@@ -24,7 +27,9 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [],
+  css: [
+    'normalize.css'
+  ],
 
   /*
   ** Plugins to load before mounting the App
