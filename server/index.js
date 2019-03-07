@@ -29,7 +29,7 @@ async function start() {
   app.listen(port, host)
 
   consola.ready({
-    message: `Server listening on http://${host === '0.0.0.0' ? '127.0.0.1' : host}:${port}`,
+    message: `Server listening on http://${host === '0.0.0.0' ? 'localhost' : host}:${port}`,
     badge: true
   })
 }

@@ -2,19 +2,24 @@
   <div class="test">
     <transition>
       <fullscreen-hero v-if="notScrolled">
-        <h1 class="title">Welcom to my world! Scroll to find more!</h1>
+        <h1 class="title">{{$t('welcome')}}</h1>
       </fullscreen-hero>
     </transition>
-    <p>Hello</p>
+    <navbar/>
   </div>
 </template>
 
 <script>
 import FullscreenHero from '../components/FullscreenHero'
+import Navbar from '../components/Navbar'
 
 export default {
+  head:{
+    title:'Neal Wang'
+  },
   components: {
-    FullscreenHero
+    FullscreenHero,
+    Navbar
   },
   computed: {
     notScrolled() {

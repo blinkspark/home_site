@@ -1,20 +1,17 @@
 const pkg = require('./package')
 
 module.exports = {
-  server: {
-    host: '0.0.0.0'
-  },
   mode: 'universal',
 
   /*
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Neal Wang',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: 'My personal website about my skills.' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
@@ -22,13 +19,14 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#fefefe' },
 
   /*
   ** Global CSS
   */
   css: [
-    'normalize.css'
+    'normalize.css',
+    '~/assets/common.scss'
   ],
 
   /*
@@ -41,7 +39,30 @@ module.exports = {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['nuxt-i18n', {
+      locales: [{ code: 'en', iso: 'en-US' }, { code: 'zh', iso: 'zh-CN' }],
+      defaultLocale: 'en',
+      vueI18n: {
+        fallbackLocale: 'en',
+        messages: {
+          en: {
+            welcome: 'Welcom to my world! Scroll to find more!',
+            home: 'Home',
+            tools: 'Tools',
+            albums: 'Albums',
+            about: 'About Me'
+          },
+          zh: {
+            welcome: '欢迎来到我的主页，请向下翻页。',
+            home: '主页',
+            tools: '工具',
+            albums: '相册',
+            about: '关于我'
+          }
+        }
+      }
+    }]
   ],
   /*
   ** Axios module configuration
