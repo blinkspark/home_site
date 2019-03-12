@@ -51,14 +51,28 @@ module.exports = {
             home: 'Home',
             tools: 'Tools',
             albums: 'Albums',
-            about: 'About Me'
+            about: 'About Me',
+            login: 'Login',
+            register: 'Register',
+            password: 'Password',
+            logout: 'Logout',
+            title: 'Title',
+            delete: 'Delete',
+            edit: 'Edit',
           },
           zh: {
             welcome: '欢迎来到我的主页，请向下翻页。',
             home: '主页',
             tools: '工具',
             albums: '相册',
-            about: '关于我'
+            about: '关于我',
+            login: '登录',
+            register: '注册',
+            password: '密码',
+            logout: '注销',
+            title: '标题',
+            delete: '删除',
+            edit: '编辑',
           }
         }
       }

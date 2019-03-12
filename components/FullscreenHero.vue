@@ -19,6 +19,7 @@ export default {
     window.addEventListener('scroll', this.onScroll)
   },
   destroyed() {
+    window.scrollTo(0, 0)
     window.removeEventListener('scroll', this.onScroll)
   },
   data() {

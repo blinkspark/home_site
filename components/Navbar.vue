@@ -1,12 +1,23 @@
 <template>
-  <div class="navbar">
+  <nav class="navbar">
     <n-link class="brand" :to="localePath('index')">{{$t('home')}}</n-link>
     <nav-menu>
       <nuxt-link :to="localePath('tools')">{{$t('tools')}}</nuxt-link>
       <nuxt-link :to="localePath('albums')">{{$t('albums')}}</nuxt-link>
       <nuxt-link :to="localePath('about')">{{$t('about')}}</nuxt-link>
     </nav-menu>
-  </div>
+    <nav-menu>
+      <nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
+      <nuxt-link :to="switchLocalePath('zh')">中文</nuxt-link>
+    </nav-menu>
+    <nav-menu right v-if="user.email">
+      <nuxt-link :to="localePath('dashboard')">{{user.email}}</nuxt-link>
+      <a @click="logout">{{$t('logout')}}</a>
+    </nav-menu>
+    <nav-menu right v-else>
+      <nuxt-link :to="localePath('login')">{{$t('login')}}</nuxt-link>
+    </nav-menu>
+  </nav>
 </template>
 
 <script>
@@ -14,13 +25,24 @@ import NavMenu from './NavMenu'
 export default {
   components: {
     NavMenu
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.commit('user', {})
+      this.$axios.get('/api/logout')
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/defines.scss';
-.navbar {
+@import '../assets/_defines.scss';
+nav {
   height: $navbarHeight;
   display: flex;
   flex-flow: row wrap;
@@ -28,6 +50,7 @@ export default {
   align-items: stretch;
   background-color: $primalColor;
   color: $white;
+  box-shadow: 0 0.1rem 0.1rem $shadowColor;
   a {
     color: $white;
     line-height: $navbarHeight;

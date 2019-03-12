@@ -1,0 +1,34 @@
+@mixin make-container {
+  display: flex;
+  flex-flow: row wrap;
+
+}
+
+@mixin make-col($width) {
+  max-width: $width;
+  flex: 0 0 $width;
+}
+
+@mixin py($width) {
+  padding-top: $width;
+  padding-bottom: $width;
+}
+
+@mixin px($width) {
+  padding-left: $width;
+  padding-right: $width;
+}
+
+@mixin my($width) {
+  margin-top: $width;
+  margin-bottom: $width;
+}
+
+@mixin mx($width) {
+  margin-left: $width;
+  margin-right: $width;
+}
+
+@mixin shadow($shadowColor) {
+  box-shadow: 0.2rem 0.2rem 0.2rem darken($shadowColor, 25%);
+}

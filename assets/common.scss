@@ -1,5 +1,83 @@
 @import './defines.scss';
-a{
+a {
   text-decoration: none;
-  color: $black;
+  color: $linkColor;
+}
+
+textarea {
+  box-shadow: 0.2rem 0.2rem 0.2rem darken($shadowColor, 25%);
+  resize: none;
+}
+
+.btn-group {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  @include make-container();
+  &.between {
+    justify-content: space-between;
+  }
+  &.around {
+    justify-content: space-around;
+  }
+}
+
+.container {
+  @include make-container();
+}
+
+button {
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.4rem 1rem;
+  box-shadow: 0.2rem 0.2rem 0.2rem darken($shadowColor, 25%);
+  &.success {
+    color: $white;
+    background-color: $successColor;
+  }
+  &.primal {
+    color: $white;
+    background-color: $primalColor;
+  }
+  &:disabled {
+    color: lightgray;
+    background-color: darkgray;
+  }
+  &:active:not(:disabled) {
+    padding: 0.3rem 0.9rem;
+    margin: 0.1rem 0.1rem;
+  }
+}
+
+.input {
+  border: none;
+  border-radius: 0.2rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0.1rem 0.1rem 0.2rem darken($shadowColor, 25%);
+}
+
+.card {
+  margin: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0.1rem 0.1rem 0.2rem darken($shadowColor, 25%);
+  .title {
+    text-align: center;
+  }
+  .actions {
+    display: flex;
+    flex-flow: row wrap;
+    &>a {
+      padding: 0.2rem 0.5rem;
+    }
+  }
+}
+
+.markdown {
+  padding: 0.5rem 1rem;
+  img {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
 }
