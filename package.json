@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development HOST=0.0.0.0 nodemon server/index.js --watch server",
     "build": "nuxt build",
     "prestart": "nuxt build",
-    "start": "cross-env NODE_ENV=production PORT=80 node server/index.js",
+    "start": "cross-env NODE_ENV=production HOST=0.0.0.0 PORT=80 node server/index.js",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
