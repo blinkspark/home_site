@@ -3,8 +3,9 @@
     <h1 class="title">{{title}}</h1>
     <div class="markdown" v-html="md"></div>
     <div class="actions">
-      <a href="#" @click="deletePost">{{$t('delete')}}</a>
-      <a href="#" @click="editPost">{{$t('edit')}}</a>
+      <a href="#" v-if="authed" @click="deletePost">{{$t('delete')}}</a>
+      <a href="#" v-if="authed" @click="editPost">{{$t('edit')}}</a>
+      <!-- <a href="#" @click="editPost">{{$t('readMore')}}</a> -->
     </div>
   </div>
 </template>
@@ -21,6 +22,10 @@ export default {
   computed: {
     md() {
       return MD.render(this.text)
+    },
+    authed() {
+      if (this.$store.state.user.accessToken && this.id) return true
+      return false
     }
   },
   methods: {

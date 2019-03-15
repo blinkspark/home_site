@@ -19,7 +19,6 @@ export default {
     window.addEventListener('scroll', this.onScroll)
   },
   destroyed() {
-    window.scrollTo(0, 0)
     window.removeEventListener('scroll', this.onScroll)
   },
   data() {
@@ -44,6 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/_defines.scss';
 .fullscreen-hero {
   min-width: 100%;
   min-height: 100vh;
@@ -63,5 +63,10 @@ export default {
   opacity: 0.5;
   min-height: 0;
   height: 0;
+}
+.title {
+  color: $white;
+  text-shadow: 1px 1px 1px $black;
+  text-align: center;
 }
 </style>

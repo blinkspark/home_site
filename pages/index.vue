@@ -53,17 +53,13 @@ export default {
     articles() {
       return this.$store.state.articles
     }
-  }
+  },
+  middleware: ['mobile']
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../assets/_defines.scss';
-.title {
-  color: $white;
-  text-shadow: 1px 1px 1px $black;
-  text-align: center;
-}
 .container {
   @include make-container();
   align-items: flex-start;

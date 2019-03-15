@@ -1,8 +1,18 @@
 <template>
   <div>
-    <nuxt />
+    <nuxt/>
+    <b-footer/>
   </div>
 </template>
+
+<script>
+import bFooter from '../components/Footer'
+export default {
+  components: {
+    bFooter
+  }
+}
+</script>
 
 <style>
 html {
@@ -16,5 +26,4 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
-
 </style>

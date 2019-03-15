@@ -50,7 +50,7 @@ nav {
   align-items: stretch;
   background-color: $primalColor;
   color: $white;
-  box-shadow: 0 0.1rem 0.1rem $shadowColor;
+  box-shadow: 0 0.2rem 0.2rem $shadowColor;
   a {
     color: $white;
     line-height: $navbarHeight;

@@ -53,13 +53,13 @@ button {
   border-radius: 0.2rem;
   line-height: 2rem;
   margin-bottom: 1rem;
-  box-shadow: 0.1rem 0.1rem 0.2rem darken($shadowColor, 25%);
+  box-shadow: 0.1rem 0.1rem 0.15rem darken($shadowColor, 30%);
 }
 
 .card {
   margin: 0.5rem;
   padding: 1rem;
-  box-shadow: 0.1rem 0.1rem 0.2rem darken($shadowColor, 25%);
+  box-shadow: 0.1rem 0.1rem 0.15rem $shadowColor;
   .title {
     text-align: center;
   }
@@ -79,5 +79,8 @@ button {
     margin-left: auto;
     margin-right: auto;
     display: block;
+  }
+  p {
+    text-indent: 2rem;
   }
 }
