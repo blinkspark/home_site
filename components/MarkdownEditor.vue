@@ -23,7 +23,11 @@
 <script>
 import MDI from 'markdown-it'
 import hljs from 'highlight.js'
-const md = new MDI()
+const md = new MDI({
+  html: true,
+  linkify: true,
+  typographer: true
+})
 export default {
   props: {
     id: { type: String, default: '' }
