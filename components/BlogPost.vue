@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <h1 class="title">{{title}}</h1>
-    <div class="markdown" v-html="md"></div>
+    <div class="markdown" v-html="md" ref="md"></div>
     <div class="actions">
       <a href="#" v-if="authed" @click="deletePost">{{$t('delete')}}</a>
       <a href="#" v-if="authed" @click="editPost">{{$t('edit')}}</a>
@@ -12,6 +12,7 @@
 
 <script>
 import MDI from 'markdown-it'
+import hljs from 'highlight.js'
 const MD = new MDI()
 export default {
   props: {
@@ -44,6 +45,11 @@ export default {
       this.$store.commit('editID', this.id)
       this.$router.push(this.localePath('dashboard'))
     }
+  },
+  mounted() {
+    this.$refs.md.querySelectorAll('pre code').forEach(block => {
+      hljs.highlightBlock(block)
+    })
   }
 }
 </script>

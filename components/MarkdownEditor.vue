@@ -12,7 +12,7 @@
       <div class="col-50">
         <div class="container mx-1" style="height:100%;">
           <div class="preview">
-            <div class="markdown" v-html="md"></div>
+            <div class="markdown" v-html="md" ref="md"></div>
           </div>
         </div>
       </div>
@@ -22,6 +22,7 @@
 
 <script>
 import MDI from 'markdown-it'
+import hljs from 'highlight.js'
 const md = new MDI()
 export default {
   props: {
@@ -46,6 +47,11 @@ export default {
         this.title = article.title
       }
     }
+  },
+  updated() {
+    this.$refs.md.querySelectorAll('pre code').forEach(block => {
+      hljs.highlightBlock(block)
+    })
   },
   methods: {
     async save() {

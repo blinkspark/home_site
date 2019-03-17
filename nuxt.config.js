@@ -19,7 +19,8 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.7.2/css/all.css' }
+      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.7.2/css/all.css' },
+      { rel: 'stylesheet', href: '//cdn.jsdelivr.net/npm/highlight.js@9.15.6/styles/darcula.min.css' }
     ]
   },
 
@@ -33,7 +34,7 @@ module.exports = {
   */
   css: [
     'normalize.css',
-    '~/assets/common.scss'
+    '~/assets/common.scss',
   ],
 
   /*
