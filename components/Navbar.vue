@@ -2,8 +2,8 @@
   <nav class="navbar">
     <n-link class="brand" :to="localePath('index')">{{$t('home')}}</n-link>
     <nav-menu>
-      <nuxt-link :to="localePath('tools')">{{$t('tools')}}</nuxt-link>
-      <nuxt-link :to="localePath('albums')">{{$t('albums')}}</nuxt-link>
+      <!-- <nuxt-link :to="localePath('tools')">{{$t('tools')}}</nuxt-link>
+      <nuxt-link :to="localePath('albums')">{{$t('albums')}}</nuxt-link> -->
       <nuxt-link :to="localePath('about')">{{$t('about')}}</nuxt-link>
     </nav-menu>
     <nav-menu>
