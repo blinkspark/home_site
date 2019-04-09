@@ -1,26 +1,16 @@
 <template>
-  <div class="root">
-    <login-panel/>
+  <div class="center-container mh-100 bg-dark">
+    <Login />
   </div>
 </template>
 
 <script>
-import LoginPanel from '../components/LoginPanel'
+import Login from '../components/Login'
 export default {
   components: {
-    LoginPanel
+    Login
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.root {
-  min-height: 100vh;
-  background-color: rgb(84, 96, 124);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-</style>
-
+<style lang="scss" src='~/assets/style.scss'></style>

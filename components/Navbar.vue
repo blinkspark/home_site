@@ -1,67 +1,54 @@
 <template>
-  <nav class="navbar">
-    <n-link class="brand" :to="localePath('index')">{{$t('home')}}</n-link>
-    <nav-menu>
-      <!-- <nuxt-link :to="localePath('tools')">{{$t('tools')}}</nuxt-link>
-      <nuxt-link :to="localePath('albums')">{{$t('albums')}}</nuxt-link> -->
-      <nuxt-link :to="localePath('about')">{{$t('about')}}</nuxt-link>
-    </nav-menu>
-    <nav-menu>
-      <nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
-      <nuxt-link :to="switchLocalePath('zh')">中文</nuxt-link>
-    </nav-menu>
-    <nav-menu right v-if="user.email">
-      <nuxt-link :to="localePath('dashboard')">{{user.email}}</nuxt-link>
-      <a @click="logout">{{$t('logout')}}</a>
-    </nav-menu>
-    <nav-menu right v-else>
-      <nuxt-link :to="localePath('login')">{{$t('login')}}</nuxt-link>
-    </nav-menu>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#">Neal Wang</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">{{$t('home')}}</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >Dropdown link</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+    </div>
   </nav>
 </template>
 
 <script>
-import NavMenu from './NavMenu'
-export default {
-  components: {
-    NavMenu
-  },
-  computed: {
-    user() {
-      return this.$store.state.user
-    }
-  },
-  methods: {
-    logout() {
-      this.$store.commit('user', {})
-      this.$axios.get('/api/logout')
-    }
-  }
-}
+export default {}
 </script>
 
-<style lang="scss" scoped>
-@import '../assets/_defines.scss';
-nav {
-  height: $navbarHeight;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  background-color: $primalColor;
-  color: $white;
-  box-shadow: 0 0.2rem 0.2rem $shadowColor;
-  a {
-    color: $white;
-    line-height: $navbarHeight;
-    padding: 0 0.5rem;
-    &:hover {
-      background-color: lighten($color: $primalColor, $amount: 10%);
-    }
-  }
-  .brand {
-    font-size: 1.25rem;
-  }
-}
+<style>
 </style>
-

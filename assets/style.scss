@@ -1,0 +1,14 @@
+.center-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center{
+  justify-self: center;
+  align-self: center;
+}
+
+.mh-100{
+  min-height: 100vh;
+}
