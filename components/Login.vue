@@ -1,6 +1,9 @@
 <template>
-  <div class="center bg-secondary text-light px-5 py-5">
+  <div class="center bg-secondary text-light px-5 py-5 br-1">
     <form>
+      <div class="form-group">
+        <h2 class="text-center">{{$t('login')}}</h2>
+      </div>
       <div class="form-group">
         <label for="email">{{$t('email')}}</label>
         <input id="email" class="form-control" type="email" v-model="email">
@@ -21,18 +24,25 @@
 export default {
   data() {
     return {
-      email:'',
-      password:''
+      email: '',
+      password: ''
     }
   },
   methods: {
-    login(){
-      console.log(this.email)
-      console.log(this.password)
+    async login(e) {
+      e.preventDefault()
+      const res = await this.$axios.post('/api/login', {
+        email: this.email,
+        password: this.password
+      })
+      if(res.data.error){
+        console.log(res.data.error)
+      }else{
+        this.$store.commit('user',res.data.user)
+        this.$router.push(this.localePath('index'))
+      }
     }
   }
 }
 </script>
-
-<style lang="scss" src='~/assets/style.scss'></style>
 

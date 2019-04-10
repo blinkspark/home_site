@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="#">Neal Wang</a>
+      <n-link class="navbar-brand" :to="localePath('index')">Neal Wang</n-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -15,8 +15,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">{{$t('home')}}</a>
+          <li class="nav-item">
+            <n-link class="nav-link" :to="localePath('index')">{{$t('home')}}</n-link>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="#">Features</a>
@@ -39,7 +39,18 @@
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
-          </li> -->
+          </li>-->
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li v-if="isLogin" class="nav-item">
+            <a class="nav-link">{{user.email}}</a>
+          </li>
+          <li v-if="isLogin" class="nav-item">
+            <a class="nav-link" @click="logout">{{$t('logout')}}</a>
+          </li>
+          <li v-else class="nav-item">
+            <n-link :to="localePath('login')" class="nav-link">{{$t('login')}}</n-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -47,7 +58,23 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    user(){
+      return this.$store.state.user
+    },
+    isLogin() {
+      if (this.user.email) return true
+      return false
+    }
+  },
+  methods: {
+    async logout(){
+      await this.$axios.get('/api/logout')
+      this.$store.commit('user',{})
+    }
+  },
+}
 </script>
 
 <style>

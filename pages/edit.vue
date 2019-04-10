@@ -1,15 +1,14 @@
 <template>
   <div>
-    <Navbar />
-    <nuxt />
+    <BlogEditor/>
   </div>
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
+import BlogEditor from '../components/BlogEditor'
 export default {
   components: {
-    Navbar
+    BlogEditor
   }
 }
 </script>
