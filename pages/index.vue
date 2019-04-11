@@ -19,7 +19,6 @@ export default {
     if (data.error) {
       return defaultObj
     } else {
-      console.log(data)
       return {
         posts: data.articles
       }

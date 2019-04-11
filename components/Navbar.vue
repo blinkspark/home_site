@@ -16,7 +16,10 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <n-link class="nav-link" :to="localePath('index')">{{$t('home')}}</n-link>
+            <n-link class="nav-link" :to="switchLocalePath('en')">English</n-link>
+          </li>
+          <li class="nav-item">
+            <n-link class="nav-link" :to="switchLocalePath('zh')">中文</n-link>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="#">Features</a>

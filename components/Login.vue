@@ -36,7 +36,7 @@ export default {
         password: this.password
       })
       if(res.data.error){
-        console.log(res.data.error)
+        console.error(res.data.error)
       }else{
         this.$store.commit('user',res.data.user)
         this.$router.push(this.localePath('index'))

@@ -25,7 +25,7 @@ Router.post('/login', async (req, res) => {
       res.json({ error: 'User not found!' })
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.json({ error })
   }
 })
@@ -45,7 +45,7 @@ Router.post('/register', async (req, res) => {
       }
     })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.json({ error })
   }
 })
@@ -74,7 +74,7 @@ Router.post('/posts', async (req, res) => {
       })
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.json({ error: error.toString() })
   }
 })
@@ -84,7 +84,18 @@ Router.get('/posts', async (req, res) => {
     const articles = await ArticleModel.find().sort({ cdate: -1 })
     res.json({ articles })
   } catch (error) {
-    console.log(error)
+    console.error(error)
+    res.json({ error: error.toString() })
+  }
+})
+
+Router.get('/posts/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const article = await ArticleModel.findOne({ _id: id })
+    res.json({ article })
+  } catch (error) {
+    console.error(error)
     res.json({ error: error.toString() })
   }
 })
@@ -99,7 +110,7 @@ Router.delete('/posts/:id', async (req, res) => {
     const result = await ArticleModel.deleteOne({ _id: id })
     res.json({ ok: result.ok })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.json({ error: error.toString() })
   }
 })
@@ -114,11 +125,12 @@ Router.put('/posts/:id', async (req, res) => {
 
     result.title = req.body.title
     result.text = req.body.text
+    result.mdate = Date.now()
     await result.save()
 
     res.json({ ok: true })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.json({ error: error.toString() })
   }
 })
