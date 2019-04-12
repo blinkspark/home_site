@@ -2,7 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-sm-12 my-3">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Title" v-model="innerTitle">
+        </div>
+        <div class="form-group">
         <textarea class="form-control" rows="15" resize="false" v-model="innerText"></textarea>
+        </div>
         <div class="form-group mt-3">
           <button class="btn btn-success" @click="save">{{$t('save')}}</button>
         </div>
@@ -23,11 +28,11 @@ const MD = new MDI({
   typographer: true
 })
 export default {
+  props: {
+    article: { type: Object, default: () => ({}) }
+  },
   data() {
     return { innerTitle: '', innerText: '' }
-  },
-  props: {
-    article: Object
   },
   computed: {
     md() {
@@ -35,8 +40,10 @@ export default {
     }
   },
   mounted() {
-    this.innerTitle = this.article.title
-    this.innerText = this.article.text
+    if (this.article._id) {
+      this.innerTitle = this.article.title
+      this.innerText = this.article.text
+    }
   },
   updated() {
     this.$refs.md.querySelectorAll('pre code').forEach(block => {
@@ -46,10 +53,18 @@ export default {
   methods: {
     async save() {
       try {
-        await this.$axios.put(`/api/posts/${this.article._id}`,{
-          title:this.innerTitle,
-          text:this.innerText
-        })
+        if (this.article._id) {
+          await this.$axios.put(`/api/posts/${this.article._id}`, {
+            title: this.innerTitle,
+            text: this.innerText
+          })
+        }else{
+          console.log('here')
+          await this.$axios.post(`/api/posts`, {
+            title: this.innerTitle,
+            text: this.innerText
+          })
+        }
         this.$router.push(this.localePath('index'))
       } catch (error) {
         console.error(error)

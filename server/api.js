@@ -57,22 +57,16 @@ Router.get('/logout', async (req, res) => {
 
 Router.post('/posts', async (req, res) => {
   try {
-    const accessToken = req.body.user.accessToken
-    if (accessToken === req.session.user.accessToken) {
-      const user = await UserModel.findOne({ accessToken })
-      if (!user) throw 'User not fount!'
-      const article = await ArticleModel.create({
-        author: user._id,
-        title: req.body.title,
-        text: req.body.text
-      })
-      if (!article) throw 'Create Article Error!'
-      res.json({ ok: true })
-    } else {
-      res.json({
-        error: 'Wrong user info!'
-      })
-    }
+    const accessToken = req.session.user.accessToken
+    const user = await UserModel.findOne({ accessToken })
+    if (!user) throw 'User not fount!'
+    const article = await ArticleModel.create({
+      author: user._id,
+      title: req.body.title,
+      text: req.body.text
+    })
+    if (!article) throw 'Create Article Error!'
+    res.json({ ok: true })
   } catch (error) {
     console.error(error)
     res.json({ error: error.toString() })

@@ -4,8 +4,8 @@
     <div class="card-body">
       <div class="md" v-html="md" ref="md"></div>
       <div v-if="isLogin">
-        <a class="card-link" :href="`/edit?id=${_id}`">{{$t('edit')}}</a>
-        <a class="card-link" href="#">{{$t('delete')}}</a>
+        <n-link class="card-link" :to="localePath({name:'edit',query:{id:_id}})">{{$t('edit')}}</n-link>
+        <a class="card-link" href="#" @click="deletePost">{{$t('delete')}}</a>
       </div>
     </div>
   </div>
@@ -36,6 +36,13 @@ export default {
     },
     isLogin() {
       return Boolean(this.$store.state.user.accessToken)
+    }
+  },
+  methods: {
+    async deletePost(e) {
+      e.preventDefault()
+      await this.$axios.delete(`/api/posts/${this._id}`)
+      location.reload()
     }
   }
 }

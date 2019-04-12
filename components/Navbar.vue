@@ -46,7 +46,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <li v-if="isLogin" class="nav-item">
-            <a class="nav-link">{{user.email}}</a>
+            <n-link :to="localePath('edit')" class="nav-link" >{{user.email}}</n-link>
           </li>
           <li v-if="isLogin" class="nav-item">
             <a class="nav-link" @click="logout">{{$t('logout')}}</a>
