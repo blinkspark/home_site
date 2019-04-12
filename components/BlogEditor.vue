@@ -6,7 +6,7 @@
           <input type="text" class="form-control" placeholder="Title" v-model="innerTitle">
         </div>
         <div class="form-group">
-        <textarea class="form-control" rows="15" resize="false" v-model="innerText"></textarea>
+        <textarea class="form-control" rows="27" resize="false" v-model="innerText"></textarea>
         </div>
         <div class="form-group mt-3">
           <button class="btn btn-success" @click="save">{{$t('save')}}</button>

@@ -1,19 +1,19 @@
-.center-container{
+.center-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.center{
+.center {
   justify-self: center;
   align-self: center;
 }
 
-.mh-100{
+.mh-100 {
   min-height: 100vh;
 }
 
-.br-1{
+.br-1 {
   border-radius: 0.5rem;
 }
 
@@ -23,5 +23,9 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
+  }
+
+  p {
+    text-indent: 2rem;
   }
 }
