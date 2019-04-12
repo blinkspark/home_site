@@ -88,3 +88,5 @@ server/credential.json
 
 # session
 sessions/
+static/upload/**
+!static/upload/README.md

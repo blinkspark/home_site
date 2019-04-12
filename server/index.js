@@ -9,6 +9,7 @@ const fileStore = require('session-file-store')(session)
 const svgCaptcha = require('svg-captcha')
 const apiRouter = require('./api')
 const bodyParser = require('body-parser')
+const expressFileUpload = require('express-fileupload')
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
@@ -35,6 +36,12 @@ async function start() {
   app.use(bodyParser.json());
   // for parsing application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: true }));
+  // file upload
+  app.use(expressFileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+  }))
+
   // session
   const week = 1000 * 60 * 60 * 24 * 7
   app.use(session({

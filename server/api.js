@@ -129,4 +129,15 @@ Router.put('/posts/:id', async (req, res) => {
   }
 })
 
+Router.post('/upload', async (req, res) => {
+  const files = req.files
+  const keys = Object.keys(files)
+  for (const k of keys) {
+    const f = files[k]
+    console.log(f)
+    f.mv(`./static/upload/${f.name}`)
+  }
+  res.json({ ok: true })
+})
+
 module.exports = Router

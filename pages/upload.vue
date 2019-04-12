@@ -14,8 +14,18 @@ export default {
   methods: {
     upload() {
       const files = this.$refs.files.files
-      console.log(files)
-      this.$store.dispatch('addNotify', 'Hello')
+      if (files.length === 0) return
+      const formData = new FormData()
+      for (const f of files) {
+        formData.append(f.name, f)
+      }
+      const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+      this.$axios
+        .post('/api/upload', formData, config)
+        .then(() => {
+          this.$router.push(this.localePath('index'))
+        })
+        .catch(e => this.$store.dispatch('addNotify', e.toString()))
     }
   }
 }
