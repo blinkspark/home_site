@@ -1,6 +1,6 @@
 <template>
-  <footer class="bg-secondary py-3">
-    <div class="container text-center text-light">
+  <footer class="bg-light py-4">
+    <div class="container text-center">
       <div>Copyright © 2019 Neal Wang. All Rights Reserved.</div>
     </div>
   </footer>

@@ -21,6 +21,7 @@
     "express-session": "^1.15.6",
     "highlight.js": "^9.15.6",
     "markdown-it": "^8.4.2",
+    "md5": "^2.2.1",
     "mongoose": "^5.4.17",
     "node-sass": "^4.11.0",
     "nuxt": "^2.4.0",

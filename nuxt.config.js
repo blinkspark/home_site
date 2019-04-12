@@ -24,7 +24,7 @@ module.exports = {
       { rel: 'stylesheet', href: '//cdn.jsdelivr.net/npm/highlight.js@9.15.6/styles/darcula.min.css' }
     ],
     script: [
-      { src: 'https://cdn.jsdelivr.net/combine/npm/jquery@3.3.1/dist/jquery.slim.min.js,npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js', async: true, defer: true }
+      { src: 'https://cdn.jsdelivr.net/combine/npm/jquery@3.3.1/dist/jquery.slim.min.js,npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js', defer: true }
     ]
   },
 
@@ -83,6 +83,7 @@ module.exports = {
             edit: 'Edit',
             save: 'Save',
             readMore: 'Read More',
+            upload: 'Upload',
             meP1: "I am a full stack engineer from China. I used to be a C++ programer for 5 years, mainly worked for UI and server.",
             meP2: "I taught myself Node.js, html5+css3+js, React and Vue these years, and made this site using Nuxtjs -- a Vue SSR framework, and express.",
             meP3: "I am ready for frontend, backend or fullstack jobs, and I can also make mobile apps using Flutter.",
@@ -102,6 +103,7 @@ module.exports = {
             delete: '删除',
             save: '保存',
             edit: '编辑',
+            upload: '上传',
             readMore: '查看全文',
             meP1: "我是一名来自中国的全栈工程师，有5年的C++工程师经验，主要是做UI和服务器。",
             meP2: "最近，我自学了Node.js html5 css3 JavaScript React 和 Vue。并且用NuxtJs和Express制作了这个网站。",

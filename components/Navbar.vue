@@ -46,6 +46,9 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <li v-if="isLogin" class="nav-item">
+            <n-link class="nav-link" :to="localePath('upload')">{{$t('upload')}}</n-link>
+          </li>
+          <li v-if="isLogin" class="nav-item">
             <n-link :to="localePath('edit')" class="nav-link" >{{user.email}}</n-link>
           </li>
           <li v-if="isLogin" class="nav-item">
