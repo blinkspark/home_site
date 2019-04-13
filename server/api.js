@@ -1,6 +1,8 @@
 const Router = require('express').Router()
 const { UserModel, ArticleModel } = require('./db/Models')
 const bcrypt = require('bcrypt')
+const fs = require('fs')
+const util = require('util')
 
 Router.post('/login', async (req, res) => {
   try {
@@ -134,10 +136,18 @@ Router.post('/upload', async (req, res) => {
   const keys = Object.keys(files)
   for (const k of keys) {
     const f = files[k]
-    console.log(f)
     f.mv(`./static/upload/${f.name}`)
   }
   res.json({ ok: true })
+})
+
+const readDir = util.promisify(fs.readdir)
+Router.get('/upload', async (req, res) => {
+  let files = await readDir('static/upload')
+  files = files.map((v, i) => {
+    return { name: v, href: `/upload/${v}` }
+  })
+  res.json({ list: files })
 })
 
 module.exports = Router
