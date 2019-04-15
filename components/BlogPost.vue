@@ -4,6 +4,7 @@
     <div class="card-body">
       <p>{{cdate}}</p>
       <div class="md" v-html="md" ref="md"></div>
+      <p>版权所有，转载请注明出处！</p>
       <div v-if="isLogin">
         <n-link class="card-link" :to="localePath({name:'edit',query:{id:_id}})">{{$t('edit')}}</n-link>
         <a class="card-link" href="#" @click="deletePost">{{$t('delete')}}</a>
