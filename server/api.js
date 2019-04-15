@@ -147,6 +147,9 @@ Router.get('/upload', async (req, res) => {
   files = files.map((v, i) => {
     return { name: v, href: `/upload/${v}` }
   })
+  files = files.filter(v=>{
+    return v.name !== 'README.md'
+  })
   res.json({ list: files })
 })
 

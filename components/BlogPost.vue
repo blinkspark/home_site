@@ -2,6 +2,7 @@
   <div class="shadow-sm card my-3">
     <div class="card-header text-center h3">{{title}}</div>
     <div class="card-body">
+      <p>{{cdate}}</p>
       <div class="md" v-html="md" ref="md"></div>
       <div v-if="isLogin">
         <n-link class="card-link" :to="localePath({name:'edit',query:{id:_id}})">{{$t('edit')}}</n-link>
@@ -23,12 +24,15 @@ export default {
   props: {
     _id: String,
     title: String,
-    text: String
+    text: String,
+    cdate:Date
   },
   mounted() {
     this.$refs.md.querySelectorAll('pre code').forEach(block => {
       hljs.highlightBlock(block)
     })
+    // let d = new Date()
+    // d.toLocaleDateString
   },
   computed: {
     md() {

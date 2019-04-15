@@ -26,7 +26,8 @@ export default {
       this.$axios
         .post('/api/upload', formData, config)
         .then(() => {
-          this.$router.push(this.localePath('index'))
+          // this.$router.push(this.localePath('index'))
+          location.reload()
         })
         .catch(e => this.$store.dispatch('addNotify', e.toString()))
     }
