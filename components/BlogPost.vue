@@ -25,7 +25,7 @@ export default {
     _id: String,
     title: String,
     text: String,
-    cdate:Date
+    cdate: String
   },
   mounted() {
     this.$refs.md.querySelectorAll('pre code').forEach(block => {
