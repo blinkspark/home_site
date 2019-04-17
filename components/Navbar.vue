@@ -49,7 +49,7 @@
             <n-link class="nav-link" :to="localePath('upload')">{{$t('upload')}}</n-link>
           </li>
           <li v-if="isLogin" class="nav-item">
-            <n-link :to="localePath('edit')" class="nav-link" >{{user.email}}</n-link>
+            <n-link :to="localePath('dashboard')" class="nav-link" >{{user.email}}</n-link>
           </li>
           <li v-if="isLogin" class="nav-item">
             <a class="nav-link" @click="logout">{{$t('logout')}}</a>

@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt')
 const fs = require('fs')
 const util = require('util')
 
+const ROUND = 11
+
 Router.post('/login', async (req, res) => {
   try {
     const accessToken = Buffer.from(await bcrypt.hash(req.body.email, 10)).toString('hex')
@@ -37,7 +39,7 @@ Router.post('/register', async (req, res) => {
     const accessToken = Buffer.from(await bcrypt.hash(req.body.email, 10)).toString('hex')
     const newUser = await UserModel.create({
       email: req.body.email,
-      password: await bcrypt.hash(req.body.password, 11),
+      password: await bcrypt.hash(req.body.password, ROUND),
       accessToken
     })
     res.json({
@@ -132,6 +134,10 @@ Router.put('/posts/:id', async (req, res) => {
 })
 
 Router.post('/upload', async (req, res) => {
+  if (!req.session.user.accessToken) {
+    res.json({ error: 'Access denied!' })
+    return
+  }
   const files = req.files
   const keys = Object.keys(files)
   for (const k of keys) {
@@ -142,15 +148,49 @@ Router.post('/upload', async (req, res) => {
 })
 
 const readDir = util.promisify(fs.readdir)
+const unlink = util.promisify(fs.unlink)
 Router.get('/upload', async (req, res) => {
   let files = await readDir('static/upload')
   files = files.map((v, i) => {
     return { name: v, href: `/upload/${v}` }
   })
-  files = files.filter(v=>{
+  files = files.filter(v => {
     return v.name !== 'README.md'
   })
   res.json({ list: files })
 })
 
+Router.delete('/upload/:name', async (req, res) => {
+  console.log(req.body)
+  try {
+    if (req.session.user.accessToken) {
+      const name = req.params.name
+      await unlink(`static/upload/${name}`)
+      res.json({ ok: true })
+    } else {
+      res.json({ error: 'Access denied!' })
+    }
+  } catch (error) {
+    res.json({ error })
+  }
+})
+
+Router.post('/changepassword', async (req, res) => {
+  const email = req.session.user.email
+  try {
+    const user = await UserModel.findOne({ email })
+    if (!user) {
+      res.json({ error: 'User not found.' })
+    }
+    if (await bcrypt.compare(req.body.op, user.password)) {
+      user.password = await bcrypt.hash(req.body.np, ROUND)
+      await user.save()
+      res.json({ ok: true })
+    } else {
+      res.json({ error: 'Old password not match' })
+    }
+  } catch (error) {
+    res.json({ error: error.toString() })
+  }
+})
 module.exports = Router

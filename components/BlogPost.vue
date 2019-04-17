@@ -2,7 +2,7 @@
   <div class="shadow-sm card my-3">
     <div class="card-header text-center h3">{{title}}</div>
     <div class="card-body">
-      <p>{{cdate}}</p>
+      <p class="text-right text-secondary">{{cdate}}</p>
       <div class="md" v-html="md" ref="md"></div>
       <p>版权所有，转载请注明出处！</p>
       <div v-if="isLogin">

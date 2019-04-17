@@ -2,6 +2,7 @@
   <footer class="bg-light py-4">
     <div class="container text-center">
       <div>Copyright © 2019 Neal Wang. All Rights Reserved.</div>
+      <div>Email: wangning2813@foxmail.com</div>
     </div>
   </footer>
 </template>
