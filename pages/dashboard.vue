@@ -1,24 +1,23 @@
 <template>
-  <dir class="container-fluid">
-    <div class="row">
-      <div class="col-md-3 col-sm-12">
-        <div class="list-group">
-          <a
+  <dir class="container">
+    <div class="tabs is-centered">
+      <ul>
+        <li v-for="(item, i) in items" :key="i" :class="{'is-active':index===i}">
+          <a @click="itemClicked(i)">{{item}}</a>
+        </li>
+      </ul>
+      <!-- <a
             v-for="(item, i) in items"
             :key="i"
             class="list-group-item list-group-item-action"
             :class="{active:index===i}"
             @click="itemClicked(i)"
             href="#"
-          >{{item}}</a>
-        </div>
-      </div>
-      <div class="col-md-9 col-sm-12">
-        <keep-alive>
-          <component :is="comp"></component>
-        </keep-alive>
-      </div>
+      >{{item}}</a>-->
     </div>
+    <keep-alive>
+      <component :is="comp"></component>
+    </keep-alive>
   </dir>
 </template>
 

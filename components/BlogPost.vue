@@ -48,8 +48,10 @@ export default {
   methods: {
     async deletePost(e) {
       e.preventDefault()
-      await this.$axios.delete(`/api/posts/${this._id}`)
-      location.reload()
+      if (window.confirm(`Do you want to delete ${this.title}`)) {
+        await this.$axios.delete(`/api/posts/${this._id}`)
+        location.reload()
+      }
     }
   }
 }
