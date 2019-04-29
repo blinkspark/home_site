@@ -84,16 +84,6 @@ Router.post('/posts', async (req, res) => {
   }
 })
 
-Router.get('/posts', async (req, res) => {
-  try {
-    const articles = await ArticleModel.find().sort({ cdate: -1 })
-    res.json({ articles })
-  } catch (error) {
-    console.error(error)
-    res.json({ error: error.toString() })
-  }
-})
-
 Router.get('/posts/:id', async (req, res) => {
   try {
     const id = req.params.id
@@ -105,6 +95,15 @@ Router.get('/posts/:id', async (req, res) => {
   }
 })
 
+Router.get('/posts', async (req, res) => {
+  try {
+    const articles = await ArticleModel.find().sort({ cdate: -1 })
+    res.json({ articles })
+  } catch (error) {
+    console.error(error)
+    res.json({ error: error.toString() })
+  }
+})
 
 Router.delete('/posts/:id', async (req, res) => {
   const id = req.params.id

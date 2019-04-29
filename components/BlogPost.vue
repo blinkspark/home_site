@@ -1,7 +1,9 @@
 <template>
   <div class="shadow-sm card margin-y-1">
     <div class="card-header has-background-light">
-      <div class="card-header-title is-centered is-size-4">{{title}}</div>
+      <div class="card-header-title is-centered is-size-4">
+        <n-link :to="`/read/${_id}`">{{title}}</n-link>
+      </div>
     </div>
     <div class="card-content">
       <p class="has-text-right has-text-grey">{{cdate}}</p>
