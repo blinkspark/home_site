@@ -19,13 +19,11 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css' },
+      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bulma@0.7.4/css/bulma.min.css' },
       // { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.7.2/css/all.css' },
       { rel: 'stylesheet', href: '//cdn.jsdelivr.net/npm/highlight.js@9.15.6/styles/darcula.min.css' }
     ],
-    script: [
-      { src: 'https://cdn.jsdelivr.net/combine/npm/jquery@3.3.1/dist/jquery.slim.min.js,npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js', defer: true }
-    ]
+    script: []
   },
 
   /*

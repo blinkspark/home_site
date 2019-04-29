@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-sm-12 my-3">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Title" v-model="innerTitle">
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <input type="text" class="input" placeholder="Title" v-model="innerTitle">
         </div>
-        <div class="form-group">
-        <textarea class="form-control" rows="25" resize="false" v-model="innerText"></textarea>
+        <div class="field">
+        <textarea class="textarea" rows="25" resize="false" v-model="innerText"></textarea>
         </div>
-        <div class="form-group mt-3">
-          <button class="btn btn-success" @click="save">{{$t('save')}}</button>
+        <div class="field mt-3">
+          <button class="button is-primary" @click="save">{{$t('save')}}</button>
         </div>
       </div>
-      <div class="col-md-6 col-sm-12 my-3">
+      <div class="column">
         <div class="md" ref="md" v-html="md"></div>
       </div>
     </div>

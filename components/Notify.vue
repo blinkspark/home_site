@@ -1,15 +1,8 @@
 <template>
   <div class="container">
-    <div
-      v-for="item in notifies"
-      :key="item.id"
-      class="alert alert-warning my-2 show fade"
-      role="alert"
-    >
+    <div class="notification" v-for="(item, index) in notifies" :key="index">
+      <button class="delete"></button>
       {{item.msg}}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
     </div>
   </div>
 </template>

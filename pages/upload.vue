@@ -1,7 +1,8 @@
 <template>
-  <div class="container my-5">
-    <FileUploader/>
+  <div class="container min-height-100">
     <FileList :list="list"/>
+    <hr>
+    <FileUploader/>
   </div>
 </template>
 

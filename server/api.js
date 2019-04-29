@@ -3,8 +3,15 @@ const { UserModel, ArticleModel } = require('./db/Models')
 const bcrypt = require('bcrypt')
 const fs = require('fs')
 const util = require('util')
+const path = require('path')
 
 const ROUND = 11
+const UPLOAD_PATH = 'static/upload'
+
+const readDir = util.promisify(fs.readdir)
+const unlink = util.promisify(fs.unlink)
+const rename = util.promisify(fs.rename)
+const exists = util.promisify(fs.exists)
 
 Router.post('/login', async (req, res) => {
   try {
@@ -142,15 +149,14 @@ Router.post('/upload', async (req, res) => {
   const keys = Object.keys(files)
   for (const k of keys) {
     const f = files[k]
-    f.mv(`./static/upload/${f.name}`)
+    f.mv(`${UPLOAD_PATH}/${f.name}`)
   }
   res.json({ ok: true })
 })
 
-const readDir = util.promisify(fs.readdir)
-const unlink = util.promisify(fs.unlink)
+
 Router.get('/upload', async (req, res) => {
-  let files = await readDir('static/upload')
+  let files = await readDir(UPLOAD_PATH)
   files = files.map((v, i) => {
     return { name: v, href: `/upload/${v}` }
   })
@@ -165,7 +171,7 @@ Router.delete('/upload/:name', async (req, res) => {
   try {
     if (req.session.user.accessToken) {
       const name = req.params.name
-      await unlink(`static/upload/${name}`)
+      await unlink(`${UPLOAD_PATH}/${name}`)
       res.json({ ok: true })
     } else {
       res.json({ error: 'Access denied!' })
@@ -173,6 +179,20 @@ Router.delete('/upload/:name', async (req, res) => {
   } catch (error) {
     res.json({ error })
   }
+})
+
+Router.post('/upload/rename', async (req, res) => {
+  const { oldName, newName } = req.body
+  const ofPath = path.join(UPLOAD_PATH, oldName)
+  try {
+    if (await exists(ofPath)) {
+      const nfPath = path.join(UPLOAD_PATH, newName)
+      await rename(ofPath, nfPath)
+    }
+  } catch (error) {
+    res.json({ error: error.toString() })
+  }
+  res.json({ ok: true })
 })
 
 Router.post('/changepassword', async (req, res) => {

@@ -1,19 +1,21 @@
 <template>
   <div class="container">
-    <div class="form-group">
-      <label for="op">Old Password</label>
-      <input id="op" class="form-control" type="password" v-model="op">
+    <div class="field">
+      <label for="op" class="label">Old Password</label>
+      <div class="control">
+        <input id="op" class="input" type="password" v-model="op">
+      </div>
     </div>
-    <div class="form-group">
-      <label for="np">New Password</label>
-      <input id="np" class="form-control" type="password" v-model="np">
+    <div class="field">
+      <label for="np" class="label">New Password</label>
+      <input id="np" class="input" type="password" v-model="np">
     </div>
-    <div class="form-group">
-      <label for="np1">Conform New Password</label>
-      <input id="np1" class="form-control" type="password" v-model="np1">
+    <div class="field">
+      <label for="np1" class="label">Conform New Password</label>
+      <input id="np1" class="input" type="password" v-model="np1">
     </div>
     <div>
-      <button class="btn btn-primary" @click="changePassword">Change Password</button>
+      <button class="button is-primary" @click="changePassword">Change Password</button>
     </div>
   </div>
 </template>

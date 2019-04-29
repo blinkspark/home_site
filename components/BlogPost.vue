@@ -1,14 +1,16 @@
 <template>
-  <div class="shadow-sm card my-3">
-    <div class="card-header text-center h3">{{title}}</div>
-    <div class="card-body">
-      <p class="text-right text-secondary">{{cdate}}</p>
+  <div class="shadow-sm card margin-y-1">
+    <div class="card-header has-background-light">
+      <div class="card-header-title is-centered is-size-4">{{title}}</div>
+    </div>
+    <div class="card-content">
+      <p class="has-text-right has-text-grey">{{cdate}}</p>
       <div class="md" v-html="md" ref="md"></div>
-      <p>版权所有，转载请注明出处！</p>
-      <div v-if="isLogin">
-        <n-link class="card-link" :to="localePath({name:'edit',query:{id:_id}})">{{$t('edit')}}</n-link>
-        <a class="card-link" href="#" @click="deletePost">{{$t('delete')}}</a>
-      </div>
+      <p class="margin-y-1">版权所有，转载请注明出处！</p>
+    </div>
+    <div v-if="isLogin" class="card-footer">
+      <n-link class="card-footer-item" :to="localePath({name:'edit',query:{id:_id}})">{{$t('edit')}}</n-link>
+      <a class="card-footer-item" href="#" @click="deletePost">{{$t('delete')}}</a>
     </div>
   </div>
 </template>

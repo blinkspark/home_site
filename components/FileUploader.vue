@@ -1,10 +1,10 @@
 <template>
-  <div class="container mb-5">
-    <div class="form-group">
+  <div class="container margin-y-1">
+    <div class="field">
       <input class="form-control-file" ref="files" type="file" multiple>
     </div>
-    <div class="form-group">
-      <button class="btn btn-primary" @click="upload">{{$t('upload')}}</button>
+    <div class="field">
+      <button class="button is-primary" @click="upload">{{$t('upload')}}</button>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="center-container mh-100 bg-dark">
+  <div class="center-container min-height-100 has-background-black">
     <Login />
   </div>
 </template>

@@ -1,63 +1,36 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar is-dark">
     <div class="container">
-      <n-link class="navbar-brand" :to="localePath('index')">Neal Wang</n-link>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <n-link class="nav-link" :to="switchLocalePath('en')">English</n-link>
-          </li>
-          <li class="nav-item">
-            <n-link class="nav-link" :to="switchLocalePath('zh')">中文</n-link>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >Dropdown link</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>-->
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li v-if="isLogin" class="nav-item">
-            <n-link class="nav-link" :to="localePath('upload')">{{$t('upload')}}</n-link>
-          </li>
-          <li v-if="isLogin" class="nav-item">
-            <n-link :to="localePath('dashboard')" class="nav-link" >{{user.email}}</n-link>
-          </li>
-          <li v-if="isLogin" class="nav-item">
-            <a class="nav-link" @click="logout">{{$t('logout')}}</a>
-          </li>
-          <li v-else class="nav-item">
-            <n-link :to="localePath('login')" class="nav-link">{{$t('login')}}</n-link>
-          </li>
-        </ul>
+      <div class="navbar-brand">
+        <n-link class="navbar-item" :to="localePath('index')">Neal Wang</n-link>
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+          @click="toggle"
+          :class="{'is-active':navMenuActive}"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu" :class="{'is-active':navMenuActive}">
+        <div class="navbar-start">
+          <n-link class="navbar-item" :to="switchLocalePath('en')">English</n-link>
+          <n-link class="navbar-item" :to="switchLocalePath('zh')">中文</n-link>
+        </div>
+        <div class="navbar-end" v-if="isLogin">
+          <n-link class="navbar-item" :to="localePath('upload')">{{$t('upload')}}</n-link>
+          <n-link :to="localePath('dashboard')" class="navbar-item">{{user.email}}</n-link>
+          <a class="navbar-item" @click="logout">{{$t('logout')}}</a>
+        </div>
+        <div class="navbar-end" v-else>
+          <n-link :to="localePath('login')" class="navbar-item">{{$t('login')}}</n-link>
+        </div>
       </div>
     </div>
   </nav>
@@ -66,7 +39,7 @@
 <script>
 export default {
   computed: {
-    user(){
+    user() {
       return this.$store.state.user
     },
     isLogin() {
@@ -75,11 +48,19 @@ export default {
     }
   },
   methods: {
-    async logout(){
+    async logout() {
       await this.$axios.get('/api/logout')
-      this.$store.commit('user',{})
+      this.$store.commit('user', {})
+    },
+    toggle() {
+      this.navMenuActive = !this.navMenuActive
     }
   },
+  data() {
+    return {
+      navMenuActive: false
+    }
+  }
 }
 </script>
 
