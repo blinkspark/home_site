@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item is-size-3" href="/">Neal Wang</a>
+      <nuxt-link class="navbar-item is-size-3" to="/">Neal Wang</nuxt-link>
       <a
         role="button"
         class="navbar-burger burger"
@@ -17,9 +17,9 @@
 
     <div class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item" href="/">Home</a>
-        <a class="navbar-item" href="/todos">Todos</a>
-
+        <nuxt-link class="navbar-item" to="/">Home</nuxt-link>
+        <nuxt-link class="navbar-item" to="/todos">Todos</nuxt-link>
+        
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">More</a>
 

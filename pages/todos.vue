@@ -1,6 +1,7 @@
 <template>
   <div class="container pa-1">
-    <Panel title="Wish List" :list="list0" />
+    <Panel title="Wish List" :list="wishList" />
+    <Panel title="Todo List" :list="todos" />
   </div>
 </template>
 
@@ -13,12 +14,18 @@ export default {
     Panel
   },
   computed: {
-    list0() {
-      return this.$store.state.todos.list0;
+    wishList() {
+      return this.$store.state.todos.wishList;
+    },
+    todos() {
+      return this.$store.state.todos.todos;
     }
   },
   data() {
     return {};
+  },
+  fetch(){
+    console.log("fetch")
   }
 };
 </script>
